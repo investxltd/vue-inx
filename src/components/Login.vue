@@ -1,12 +1,51 @@
 <template>
-    <div class="login">
-        <h3>Sign In</h3>
-        <input type="text" v-model="email" placeholder="Email"><br>
-        <input type="password" v-model="password" placeholder="Password"><br>
-        <button v-on:click="signIn">Connection</button>
-        <p>You don't have an account ? You can
-            <router-link to="/sign-up">create one</router-link>
-        </p>
+    <!--<div class="container">-->
+    <!--<input type="text" v-model="email" placeholder="Email"><br>-->
+    <!--<input type="password" v-model="password" placeholder="Password"><br>-->
+    <!--<button v-on:click="signIn">Connection</button>-->
+    <!--<p>You don't have an account ? You can-->
+    <!--<router-link to="/sign-up">create one</router-link>-->
+    <!--</p>-->
+    <!--</div>-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <div class="text-center mb-5">
+                            <img alt="Investx" src="../assets/inx_logo.png" class="inx-logo"/>
+                        </div>
+                        <h5 class="card-title text-center">
+                            Sign In
+                        </h5>
+
+                        <div class="form-group">
+                            <label for="inputEmail">Email address</label>
+                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="email" required autofocus>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputPassword">Password</label>
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" v-model="password" required>
+                        </div>
+
+                        <button class="btn btn-lg btn-primary btn-block" v-on:click="signIn">Sign in</button>
+
+                        <hr class="my-4">
+
+                        <button class="btn btn-lg btn-google btn-block"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
+                        <button class="btn btn-lg btn-facebook btn-block"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+
+                        <hr class="my-4">
+
+                        <p>
+                            You don't have an account? You can
+                            <router-link to="/register">register</router-link>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -33,29 +72,29 @@
 </script>
 
 <style scoped lang="scss">
-.login {
-    margin-top: 40px;
-}
+    .card-signin {
+        border: 0;
+        border-radius: 1rem;
+        box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+    }
 
-input {
-    margin: 10px 0;
-    width: 20%;
-    padding: 15px;
-}
+    .card-signin .card-title {
+        margin-bottom: 2rem;
+        font-weight: 300;
+        font-size: 1.5rem;
+    }
 
-button {
-    margin-top: 20px;
-    width: 10%;
-    cursor: pointer;
-}
+    .card-signin .card-body {
+        padding: 2rem;
+    }
 
-p {
-    margin-top: 40px;
-    font-size: 13px;
-}
+    .btn-google {
+        color: white;
+        background-color: #ea4335;
+    }
 
-p a {
-    text-decoration: underline;
-    cursor: pointer;
-}
+    .btn-facebook {
+        color: white;
+        background-color: #3b5998;
+    }
 </style>

@@ -32,8 +32,8 @@ let router = new Router({
             component: Login
         },
         {
-            path: '/sign-up',
-            name: 'sign-up',
+            path: '/register',
+            name: 'register',
             component: SignUp
         },
         {
