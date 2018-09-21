@@ -9,13 +9,22 @@
 
         <hr>
 
-        <button v-on:click="logout" class="btn btn-block btn-outline-primary">Logout</button>
+        <a v-on:click="logout" href="#" class="sidebar-logout">Logout</a>
     </nav>
 </template>
 
 <script>
+    import firebase from 'firebase';
+
     export default {
-        name: 'sidebar'
+        name: 'sidebar',
+        methods: {
+            logout: function () {
+                firebase.auth().signOut().then(() => {
+                    this.$router.replace('login');
+                });
+            }
+        }
     };
 </script>
 
@@ -47,6 +56,10 @@
         a:hover {
             /*color: #7386D5;*/
             /*background: #fff;*/
+        }
+
+        .sidebar-logout {
+            font-size: 0.85rem;
         }
     }
 </style>
