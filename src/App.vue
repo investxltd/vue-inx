@@ -1,32 +1,27 @@
 <template>
     <div id="app">
-        <!--<div id="nav">-->
-            <!--<router-link to="/">Home</router-link>-->
-            <!--|-->
-            <!--<router-link to="/about">About</router-link>-->
-            <!--|-->
-            <!--<router-link to="/sign-up">Sign-Up</router-link>-->
-            <!--|-->
-            <!--<router-link to="/login">Login</router-link>-->
-
-            <!--<span class="badge badge-primary">ssss</span>-->
-        <!--</div>-->
         <router-view/>
     </div>
 </template>
 
 <script>
+    import firebase from 'firebase';
+
     export default {
         name: 'app',
-        components: {
-
+        components: {},
+        methods: {
+            logout: function () {
+                firebase.auth().signOut().then(() => {
+                    this.$router.replace('login');
+                });
+            }
         }
     };
 </script>
 
 <style lang="scss">
     @import 'assets/scss/inx-colours.scss';
-
     @import '../node_modules/bootstrap/scss/bootstrap.scss';
     @import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css';
 
@@ -36,14 +31,41 @@
         background-color: $body-bg;
     }
 
-    #nav {
-        padding: 30px;
+    .wrapper {
+        display: flex;
+        align-items: stretch;
+    }
+
+    #sidebar {
+        min-width: 250px;
+        max-width: 250px;
+        background: $body-bg;
+        color: $body-color;
+        transition: all 0.3s;
+
+        .sidebar-header {
+            padding: 20px;
+        }
+
         a {
-            font-weight: bold;
+            padding: 10px;
+            font-size: 1.1em;
+            display: block;
+            text-decoration: none;
             &.router-link-exact-active {
-                color: $primary;
+                color: $white;
+                background-color: $body-color;
             }
         }
+
+        a:hover {
+            /*color: #7386D5;*/
+            /*background: #fff;*/
+        }
+    }
+
+    #content {
+        margin: 50px;
     }
 
     .inx-logo {
