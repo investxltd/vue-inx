@@ -15,18 +15,25 @@ let router = new Router({
     base: process.env.BASE_URL,
     routes: [
         {
-            path: '/',
+            path: '*',
+            redirect: '/login'
+        },
+        {
+            path: '/home',
             name: 'home',
-            component: Home
+            component: Home,
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: '/login',
-            name: 'Login',
+            name: 'login',
             component: Login
         },
         {
             path: '/sign-up',
-            name: 'SignUp',
+            name: 'sign-up',
             component: SignUp
         },
         {
@@ -48,7 +55,7 @@ router.beforeEach((to, from, next) => {
         next('login');
     }
     else if (!requiresAuth && currentUser) {
-        next('hello');
+        next('home');
     }
     else {
         next();

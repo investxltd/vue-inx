@@ -4,10 +4,24 @@
             <router-link to="/">Home</router-link>
             |
             <router-link to="/about">About</router-link>
+            |
+            <router-link to="/sign-up">Sign-Up</router-link>
+            |
+            <router-link to="/login">Login</router-link>
         </div>
         <router-view/>
     </div>
 </template>
+
+<script>
+    // @ is an alias to /src
+    import firebase from 'firebase';
+
+    export default {
+        name: 'app',
+        components: {}
+    };
+</script>
 
 <style lang="scss">
     #app {
