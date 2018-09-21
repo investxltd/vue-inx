@@ -23,21 +23,16 @@
         },
         methods: {
             signIn: function () {
-                firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-                    (user) => {
-                        console.log(user);
-                        this.$router.replace('hello');
-                    },
-                    (err) => {
-                        alert('Oops. ' + err.message);
-                    }
-                );
+                firebase.auth()
+                    .signInWithEmailAndPassword(this.email, this.password)
+                    .then((/*user*/) => this.$router.replace('home'))
+                    .catch((err) => alert('Oops. ' + err.message));
             }
         }
     };
 </script>
 
-<style scoped>  /* "scoped" attribute limit the CSS to this component only */
+<style scoped lang="scss">
 .login {
     margin-top: 40px;
 }

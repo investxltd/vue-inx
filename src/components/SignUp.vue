@@ -21,21 +21,16 @@
         },
         methods: {
             signUp: function () {
-                firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-                    (user) => {
-                        console.log(user);
-                        this.$router.replace('about');
-                    },
-                    (err) => {
-                        alert('Oops. ' + err.message);
-                    }
-                );
+                firebase.auth()
+                    .createUserWithEmailAndPassword(this.email, this.password)
+                    .then((/*user*/) => this.$router.replace('about'))
+                    .catch((err) => alert('Oops. ' + err.message));
             }
         }
     };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .signUp {
         margin-top: 40px;
     }
