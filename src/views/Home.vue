@@ -1,17 +1,6 @@
 <template>
     <div class="wrapper">
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <img alt="Investx" src="../assets/inx_logo.png" class="inx-logo">
-            </div>
-
-            <router-link to="/home">Home</router-link>
-            <router-link to="/about">About</router-link>
-
-            <hr>
-
-            <button v-on:click="logout" class="btn btn-block btn-outline-primary">Logout</button>
-        </nav>
+        <sidebar></sidebar>
 
         <div id="content">
             <HelloWorld msg="Welcome to Your Vue.js App"/>
@@ -21,13 +10,12 @@
 
 <script>
     // @ is an alias to /src
-    import HelloWorld from '@/components/HelloWorld.vue';
+    import HelloWorld from '@/components/HelloWorld';
+    import Sidebar from '@/components/Sidebar';
 
     export default {
         name: 'home',
-        components: {
-            HelloWorld
-        }
+        components: { HelloWorld, Sidebar }
     };
 </script>
 

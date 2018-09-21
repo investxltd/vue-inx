@@ -1,20 +1,23 @@
 <template>
-  <div class="wrapper">
-    <nav id="sidebar">
-      <div class="sidebar-header">
-        <img alt="Investx" src="../assets/inx_logo.png" class="inx-logo">
-      </div>
+    <div class="wrapper">
+        <sidebar></sidebar>
 
-      <router-link to="/home">Home</router-link>
-      <router-link to="/about">About</router-link>
-
-      <hr>
-
-      <button v-on:click="logout" class="btn btn-block btn-outline-primary">Logout</button>
-    </nav>
-
-    <div id="content">
-      <h1>About</h1>
+        <div id="content">
+            <h1>About</h1>
+        </div>
     </div>
-  </div>
 </template>
+
+<script>
+    // @ is an alias to /src
+    import Sidebar from '@/components/Sidebar';
+
+    export default {
+        name: 'about',
+        components: {Sidebar}
+    };
+</script>
+
+<style scoped lang="scss">
+
+</style>

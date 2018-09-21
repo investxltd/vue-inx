@@ -1,12 +1,4 @@
 <template>
-    <!--<div class="container">-->
-    <!--<input type="text" v-model="email" placeholder="Email"><br>-->
-    <!--<input type="password" v-model="password" placeholder="Password"><br>-->
-    <!--<button v-on:click="signIn">Connection</button>-->
-    <!--<p>You don't have an account ? You can-->
-    <!--<router-link to="/sign-up">create one</router-link>-->
-    <!--</p>-->
-    <!--</div>-->
     <div class="container">
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
