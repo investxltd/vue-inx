@@ -3,7 +3,7 @@
         <sidebar></sidebar>
 
         <div id="content">
-            <h1>About</h1>
+            <h1>Token Sale</h1>
         </div>
     </div>
 </template>
@@ -13,8 +13,8 @@
     import Sidebar from '@/components/Sidebar';
 
     export default {
-        name: 'about',
-        components: {Sidebar}
+        name: 'token-sale',
+        components: { Sidebar }
     };
 </script>
 

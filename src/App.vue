@@ -15,6 +15,11 @@
     @import '../node_modules/bootstrap/scss/bootstrap.scss';
     @import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css';
 
+    h3 {
+        font-size: 1.1em;
+        color: $secondary;
+    }
+
     #app {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -27,6 +32,7 @@
     }
 
     #content {
+        width: 100%;
         margin: 20px 50px 50px 50px;
     }
 

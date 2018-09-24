@@ -2,8 +2,10 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import firebase from 'firebase';
 
-import About from '@/views/About.vue';
-import Home from '@/views/Home.vue';
+import Home from '@/views/Home';
+import TokenSale from '@/views/TokenSale';
+import Transactions from '@/views/Transactions';
+import Settings from '@/views/Settings';
 
 import Login from '@/components/Login';
 import SignUp from '@/components/SignUp';
@@ -27,6 +29,30 @@ let router = new Router({
             }
         },
         {
+            path: '/token-sale',
+            name: 'token-sale',
+            component: TokenSale,
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/transactions',
+            name: 'transactions',
+            component: Transactions,
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/settings',
+            name: 'settings',
+            component: Settings,
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
             path: '/login',
             name: 'login',
             component: Login
@@ -35,14 +61,6 @@ let router = new Router({
             path: '/register',
             name: 'register',
             component: SignUp
-        },
-        {
-            path: '/about',
-            name: 'about',
-            component: About,
-            meta: {
-                requiresAuth: true
-            }
         }
     ]
 });

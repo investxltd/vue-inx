@@ -5,11 +5,11 @@
         </div>
 
         <router-link to="/home">Home</router-link>
-        <router-link to="/about">About</router-link>
+        <router-link to="/token-sale">Token Sale</router-link>
+        <router-link to="/transactions">Transactions</router-link>
+        <router-link to="/settings">Settings</router-link>
 
-        <hr>
-
-        <a v-on:click="logout" href="#" class="sidebar-logout">Logout</a>
+        <a v-on:click="logout" href="#" class="sidebar-logout mt-5">Logout</a>
     </nav>
 </template>
 
@@ -37,6 +37,8 @@
         background: $body-bg;
         color: $body-color;
         transition: all 0.3s;
+        border-right:  1px solid $gray-300;
+        height: 100vh;
 
         .sidebar-header {
             padding: 20px;
@@ -44,7 +46,7 @@
 
         a {
             padding: 10px;
-            font-size: 1.1em;
+            font-size: 0.9em;
             display: block;
             text-decoration: none;
             &.router-link-exact-active {
@@ -59,7 +61,7 @@
         }
 
         .sidebar-logout {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
         }
     }
 </style>
