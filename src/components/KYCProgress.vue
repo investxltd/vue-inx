@@ -19,7 +19,7 @@
             Your UID is <code>{{ currentUser.uid }}</code>
         </p>
 
-        <div slot="footer">
+        <div slot="footer" v-if="currentUser.photoURL">
             <b-form @submit="onSubmit" v-if="show" novalidate :validated="true" class="">
                 <b-button type="submit" variant="primary">Start KYC</b-button>
             </b-form>

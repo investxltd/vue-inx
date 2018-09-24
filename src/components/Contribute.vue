@@ -29,10 +29,13 @@
 
 
 <script>
+    import firebase from 'firebase';
+
     export default {
         name: 'contribute',
         data () {
             return {
+                currentUser: firebase.auth().currentUser,
                 form: {
                     amount: 1
                 },
