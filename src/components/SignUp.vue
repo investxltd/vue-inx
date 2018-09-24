@@ -50,7 +50,7 @@
                 firebase.auth()
                     .createUserWithEmailAndPassword(this.email, this.password)
                     .then((/*user*/) => this.$router.replace('about'))
-                    .catch((err) => alert('Oops. ' + err.message));
+                    .catch((err) => console.error('Oops. ' + err.message));
             }
         }
     };

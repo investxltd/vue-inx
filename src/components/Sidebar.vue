@@ -6,8 +6,9 @@
 
         <router-link to="/home">Home</router-link>
         <router-link to="/token-sale">Token Sale</router-link>
+        <router-link to="/kyc">KYC</router-link>
         <router-link to="/transactions">Transactions</router-link>
-        <router-link to="/settings">Settings</router-link>
+        <router-link to="/settings">Account Settings</router-link>
 
         <a v-on:click="logout" href="#" class="sidebar-logout mt-5">Logout</a>
     </nav>

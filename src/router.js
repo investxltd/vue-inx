@@ -6,6 +6,7 @@ import Home from '@/views/Home';
 import TokenSale from '@/views/TokenSale';
 import Transactions from '@/views/Transactions';
 import Settings from '@/views/Settings';
+import KYC from '@/views/KYC';
 
 import Login from '@/components/Login';
 import SignUp from '@/components/SignUp';
@@ -48,6 +49,14 @@ let router = new Router({
             path: '/settings',
             name: 'settings',
             component: Settings,
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/kyc',
+            name: 'kyc',
+            component: KYC,
             meta: {
                 requiresAuth: true
             }
