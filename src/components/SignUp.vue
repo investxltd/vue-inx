@@ -14,6 +14,11 @@
                             <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="email" required autofocus>
                         </div>
 
+                        <!--<div class="form-group">-->
+                            <!--<label for="inputName">Full name</label>-->
+                            <!--<input type="text" id="inputName" class="form-control" placeholder="Full name" v-model="name" required>-->
+                        <!--</div>-->
+
                         <div class="form-group">
                             <label for="inputPassword">Password</label>
                             <input type="password" id="inputPassword" class="form-control" placeholder="Password" v-model="password" required>
@@ -25,7 +30,7 @@
 
                         <p>
                             Or go back to
-                            <router-link to="/login">login</router-link>
+                            <router-link to="/login">sign up</router-link>
                         </p>
                     </div>
                 </div>
@@ -42,14 +47,15 @@
         data: function () {
             return {
                 email: '',
-                password: ''
+                password: '',
+                name: ''
             };
         },
         methods: {
             signUp: function () {
                 firebase.auth()
                     .createUserWithEmailAndPassword(this.email, this.password)
-                    .then((/*user*/) => this.$router.replace('about'))
+                    .then((/*user*/) => this.$router.replace('home'))
                     .catch((err) => console.error('Oops. ' + err.message));
             }
         }

@@ -9,19 +9,26 @@
             <hr/>
 
             <div class="row">
-                <div class="col">
+                <div class="col d-flex justify-content-sm-center">
                     <contribute></contribute>
                 </div>
+            </div>
+
+            <div class="row mt-5">
                 <div class="col">
-                    <b-card title="KYC and AML" sub-title="Regulation and why it is required">
+                    <b-card title="Token Sale" sub-title="Information about the Token Sale">
+
+                        <b-table striped :items="items"></b-table>
+
+                        <div slot="footer">
+                            <router-link to="/token-sale" class="card-link">Read more</router-link>
+                        </div>
+                    </b-card>
+                </div>
+                <div class="col">
+                    <b-card title="INX Calculator" sub-title="Use the calculator to compute an estimation of the INX you will receive">
                         <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                           TODO
                         </p>
                         <div slot="footer">
                             <router-link to="/token-sale" class="card-link">Read more</router-link>
@@ -40,10 +47,25 @@
 
     export default {
         name: 'token-sale',
-        components: { Sidebar, Contribute }
+        components: {Sidebar, Contribute},
+        data () {
+            return {
+                items: [
+                    {attribute: 'Start Date', value: ''},
+                    {attribute: 'End Date', value: ''},
+                    {attribute: 'Min. Investment', value: ''},
+                    {attribute: 'Token Symbol', value: ''},
+                    {attribute: 'Total Supply', value: ''},
+                    {attribute: 'Phase', value: ''},
+                    {attribute: 'Pre-Sale Rate', value: ''},
+                    {attribute: 'Sale Rate', value: ''},
+                    {attribute: 'Total Ether Raised', value: ''}
+                ]
+            };
+        }
+
     };
 </script>
 
 <style scoped lang="scss">
-
 </style>

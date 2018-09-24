@@ -12,11 +12,10 @@
                 <h4 class="float-right">{{ form.amount }} ETH</h4>
             </b-form-group>
 
-
             <b-button type="submit" variant="primary">Contribute</b-button>
         </b-form>
 
-        <div class="or mt-3 mb-3 text-center">-- OR --</div>
+        <div class="or mt-3 mb-3 text-center">- OR -</div>
 
         <p class="card-text">
             Send ETH to the following address to buy INX
