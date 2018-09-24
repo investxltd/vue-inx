@@ -15,8 +15,12 @@
     @import '../node_modules/bootstrap/scss/bootstrap.scss';
     @import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css';
 
+    h1 {
+        margin-bottom: 0;
+    }
+
     h3 {
-        font-size: 1.1em;
+        font-size: 1.1rem;
         color: $secondary;
     }
 
@@ -38,5 +42,9 @@
 
     .inx-logo {
         height: 38px;
+    }
+
+    .card-subtitle {
+        margin-bottom: 1.5rem !important;
     }
 </style>

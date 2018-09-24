@@ -8,12 +8,25 @@
 
             <hr/>
 
-            <div class="row mt-5">
+            <div class="row">
                 <div class="col">
                     <personal-information></personal-information>
                 </div>
                 <div class="col">
-                    more stuff
+                    <b-card title="Why we need this information" sub-title="Explanation of how we handle your data">
+                        <p class="card-text">
+                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                        </p>
+                        <p class="card-text">
+                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                        </p>
+                        <p class="card-text">
+                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                        </p>
+                        <div slot="footer">
+                            <router-link to="/token-sale" class="card-link">Read more</router-link>
+                        </div>
+                    </b-card>
                 </div>
             </div>
         </div>

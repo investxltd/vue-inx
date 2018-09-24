@@ -4,11 +4,11 @@
 
         <div id="content">
             <h1>Home</h1>
-            <h3>All about Investx</h3>
+            <h3>Welcome {{ this.currentUser.displayName }} to the Investx portal</h3>
 
             <hr/>
 
-            <b-alert show variant="warning">
+            <b-alert show variant="warning" v-if="!this.currentUser.photoURL">
                 Please update you Ethereum address so we can start the KYC process.
                 <router-link to="/settings" class="alert-link">Account Settings</router-link>
             </b-alert>
@@ -71,10 +71,16 @@
 <script>
     // @ is an alias to /src
     import Sidebar from '@/components/Sidebar';
+    import firebase from 'firebase';
 
     export default {
         name: 'home',
-        components: {Sidebar}
+        components: {Sidebar},
+        data () {
+            return {
+                currentUser: firebase.auth().currentUser
+            };
+        },
     };
 </script>
 

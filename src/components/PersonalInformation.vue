@@ -8,7 +8,7 @@
             Personal information updated
         </b-alert>
 
-        <b-form @submit="onSubmit" v-if="show" novalidate>
+        <b-form @submit="onSubmit" v-if="show" novalidate :validated="true">
             <b-form-group id="email-group"
                           label="Email address:"
                           label-for="email"
