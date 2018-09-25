@@ -6,7 +6,11 @@
 
 <script>
     export default {
-        name: 'app'
+        name: 'app',
+        mounted () {
+            // Bootstrap
+            this.$store.dispatch('load-token-smart-contract');
+        }
     };
 </script>
 
