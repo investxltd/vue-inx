@@ -32,7 +32,6 @@
                               placeholder="Enter name"
                               :state="!!errors.name">
                 </b-form-input>
-                <b-form-invalid-feedback id="ethAccount-error" :force-show="errors.name">Required</b-form-invalid-feedback>
             </b-form-group>
             <b-form-group id="ethAccount-group"
                           label="ETH wallet:"
@@ -45,11 +44,8 @@
                               placeholder="Enter ETH wallet"
                               :state="!!errors.ethAccount">
                 </b-form-input>
-                <b-form-invalid-feedback id="ethAccount-error" :force-show="errors.ethAccount">Invalid ETH Wallet</b-form-invalid-feedback>
             </b-form-group>
             <b-button type="submit" variant="primary">Submit</b-button>
-
-            {{  this.errors }}
         </b-form>
     </b-card>
 </template>
@@ -82,13 +78,20 @@
             onSubmit (evt) {
                 evt.preventDefault();
 
-                this.errors.ethAccount = !!this.form.ethAccount;
+                this.errors.ethAccount = !!(this.form.ethAccount);
                 this.errors.name = !!this.form.name;
 
-                firebase.auth().currentUser.updateProfile({
-                    displayName: this.form.name,
-                    photoURL: this.form.ethAccount
-                })
+                try {
+                    ethers.utils.getAddress(this.form.ethAccount)
+                } catch (ex) {
+                    this.errors.ethAccount = false;
+                }
+
+                firebase.auth().currentUser
+                    .updateProfile({
+                        displayName: this.form.name,
+                        photoURL: this.form.ethAccount
+                    })
                     .then((/*user*/) => {
                         console.log('updated personal information');
                         this.dismissCountDown = this.dismissSecs;
