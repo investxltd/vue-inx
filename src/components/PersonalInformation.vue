@@ -85,6 +85,7 @@
                     ethers.utils.getAddress(this.form.ethAccount)
                 } catch (ex) {
                     this.errors.ethAccount = false;
+                    this.form.ethAccount = '';
                 }
 
                 firebase.auth().currentUser

@@ -3,7 +3,7 @@
         <div id="app">
             <router-view/>
         </div>
-        <footer>
+        <footer class="m-5">
             <span class="badge badge-light">{{ network }}</span>
         </footer>
     </div>
