@@ -33,7 +33,10 @@
                             Once you have passed our <em>KYC</em> process you can contribute and purchase INX tokens.
                         </p>
                         <p class="card-text">
-                            The current rate of INX tokens per ETH is XXX.
+                            Total raised in ETH so far is <strong>{{ crowdsaleData.raisedInEther }}</strong>
+                        </p>
+                        <p class="card-text">
+                            The current rate of INX tokens per ETH is <strong>{{ crowdsaleData.rate }}</strong>.
                         </p>
                         <div slot="footer">
                             <router-link to="/token-sale" class="card-link">Token Sale</router-link>
@@ -50,8 +53,12 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </p>
                         <div slot="footer">
-                            <b-button-group class="mx-1"><b-button size="sm" variant="primary">Send me the news</b-button></b-button-group>
-                            <b-button-group class="mx-1"><b-button size="sm" variant="outline-secondary">No thanks</b-button></b-button-group>
+                            <b-button-group class="mx-1">
+                                <b-button size="sm" variant="primary">Send me the news</b-button>
+                            </b-button-group>
+                            <b-button-group class="mx-1">
+                                <b-button size="sm" variant="outline-secondary">No thanks</b-button>
+                            </b-button-group>
                         </div>
                     </b-card>
                 </div>
@@ -72,6 +79,7 @@
     // @ is an alias to /src
     import Sidebar from '@/components/Sidebar';
     import firebase from 'firebase';
+    import {mapState} from 'vuex';
 
     export default {
         name: 'home',
@@ -81,6 +89,12 @@
                 currentUser: firebase.auth().currentUser
             };
         },
+        computed: {
+            ...mapState([
+                'tokenData',
+                'crowdsaleData'
+            ])
+        }
     };
 </script>
 

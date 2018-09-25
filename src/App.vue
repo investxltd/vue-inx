@@ -1,15 +1,28 @@
 <template>
-    <div id="app">
-        <router-view/>
+    <div>
+        <div id="app">
+            <router-view/>
+        </div>
+        <footer>
+            <span class="badge badge-light">{{ network }}</span>
+        </footer>
     </div>
 </template>
 
 <script>
+    import {mapState} from 'vuex';
+
     export default {
         name: 'app',
         mounted () {
             // Bootstrap
             this.$store.dispatch('load-token-smart-contract');
+            this.$store.dispatch('load-crowdsale-smart-contract');
+        },
+        computed: {
+            ...mapState([
+                'network'
+            ])
         }
     };
 </script>
