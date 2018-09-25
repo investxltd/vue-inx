@@ -77,11 +77,11 @@
         methods: {
             onSubmit (evt) {
                 evt.preventDefault();
-
-                this.errors.ethAccount = !!(this.form.ethAccount);
+                
                 this.errors.name = !!this.form.name;
 
                 try {
+                    this.errors.ethAccount = !!this.form.ethAccount;
                     ethers.utils.getAddress(this.form.ethAccount)
                 } catch (ex) {
                     this.errors.ethAccount = false;
