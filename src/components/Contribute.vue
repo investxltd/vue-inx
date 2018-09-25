@@ -1,5 +1,5 @@
 <template>
-    <b-card title="Contribute to the Token Sale" sub-title="Send the investment through your whitelisted ETH wallet">
+    <b-card title="Contribute to the Token Sale" sub-title="Send the investment through your whitelisted ETH wallet" class="shadow-sm">
 
         <b-form @submit="onSubmit" v-if="show" novalidate class="">
 

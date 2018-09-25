@@ -1,5 +1,5 @@
 <template>
-    <b-card title="Personal Information" sub-title="">
+    <b-card title="Personal Information" sub-title="" class="shadow-sm">
         <b-alert :show="dismissCountDown"
                  dismissible
                  variant="success"
@@ -8,7 +8,7 @@
             Personal information updated
         </b-alert>
 
-        <b-form @submit="onSubmit" v-if="show" novalidate :validated="true">
+        <b-form @submit="onSubmit" v-if="show" novalidate>
             <b-form-group id="email-group"
                           label="Email address:"
                           label-for="email"
@@ -18,7 +18,8 @@
                               v-model="form.email"
                               required
                               placeholder="Enter email"
-                              :disabled="true">
+                              :disabled="true"
+                              :state="true">
                 </b-form-input>
             </b-form-group>
             <b-form-group id="name-group"
@@ -28,8 +29,10 @@
                               type="text"
                               v-model="form.name"
                               required
-                              placeholder="Enter name">
+                              placeholder="Enter name"
+                              :state="!!errors.name">
                 </b-form-input>
+                <b-form-invalid-feedback id="ethAccount-error" :force-show="errors.name">Required</b-form-invalid-feedback>
             </b-form-group>
             <b-form-group id="ethAccount-group"
                           label="ETH wallet:"
@@ -39,10 +42,14 @@
                               type="text"
                               v-model="form.ethAccount"
                               required
-                              placeholder="Enter ETH wallet">
+                              placeholder="Enter ETH wallet"
+                              :state="!!errors.ethAccount">
                 </b-form-input>
+                <b-form-invalid-feedback id="ethAccount-error" :force-show="errors.ethAccount">Invalid ETH Wallet</b-form-invalid-feedback>
             </b-form-group>
             <b-button type="submit" variant="primary">Submit</b-button>
+
+            {{  this.errors }}
         </b-form>
     </b-card>
 </template>
@@ -50,6 +57,7 @@
 
 <script>
     import firebase from 'firebase';
+    import ethers from 'ethers';
 
     export default {
         name: 'personal-information',
@@ -60,6 +68,11 @@
                     name: firebase.auth().currentUser.displayName,
                     ethAccount: firebase.auth().currentUser.photoURL
                 },
+                errors: {
+                    email: !!firebase.auth().currentUser.email,
+                    name: !!firebase.auth().currentUser.displayName,
+                    ethAccount: !!firebase.auth().currentUser.photoURL
+                },
                 show: true,
                 dismissSecs: 3,
                 dismissCountDown: 0
@@ -68,6 +81,9 @@
         methods: {
             onSubmit (evt) {
                 evt.preventDefault();
+
+                this.errors.ethAccount = !!this.form.ethAccount;
+                this.errors.name = !!this.form.name;
 
                 firebase.auth().currentUser.updateProfile({
                     displayName: this.form.name,
@@ -78,12 +94,13 @@
                         this.dismissCountDown = this.dismissSecs;
                     })
                     .catch((err) => console.error('Oops. ' + err.message));
+
             },
             countDownChanged (dismissCountDown) {
-                this.dismissCountDown = dismissCountDown
+                this.dismissCountDown = dismissCountDown;
             },
             showAlert () {
-                this.dismissCountDown = this.dismissSecs
+                this.dismissCountDown = this.dismissSecs;
             }
         }
     };

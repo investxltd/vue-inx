@@ -1,5 +1,5 @@
 <template>
-    <b-card title="KYC progress" sub-title="">
+    <b-card title="KYC progress" sub-title="" class="shadow-sm">
 
         <p class="card-text">
             Due to current legislation all ICO investors, will need to pass KYC verification to get future access to the platform. That is why we have decided to collaborate with XYZ for this process

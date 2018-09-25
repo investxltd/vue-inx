@@ -13,7 +13,7 @@
                     <kyc-progress></kyc-progress>
                 </div>
                 <div class="col">
-                    <b-card title="KYC and AML" sub-title="Regulation and why it is required">
+                    <b-card title="KYC and AML" sub-title="Regulation and why it is required" class="shadow-sm">
                         <p class="card-text">
                             Some quick example text to build on the card title and make up the bulk of the card's content.
                         </p>

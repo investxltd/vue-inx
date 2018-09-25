@@ -16,7 +16,7 @@
 
             <div class="row mt-5">
                 <div class="col">
-                    <b-card title="Token Sale" sub-title="Information about the Token Sale">
+                    <b-card title="Token Sale" sub-title="Information about the Token Sale" class="shadow-sm">
 
                         <table class="table table-striped" v-if="tokenData && crowdsaleData">
                             <tbody>
@@ -69,7 +69,7 @@
                     </b-card>
                 </div>
                 <div class="col">
-                    <b-card title="INX Calculator" sub-title="Use the calculator to compute an estimation of the INX you will receive">
+                    <b-card title="INX Calculator" sub-title="Use the calculator to compute an estimation of the INX you will receive" class="shadow-sm">
                         <p class="card-text"></p>
                     </b-card>
                 </div>
