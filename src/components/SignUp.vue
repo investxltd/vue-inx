@@ -14,6 +14,12 @@
                             <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="email" required autofocus>
                         </div>
 
+                        <div class="form-group">
+                            <label for="inputName">Full Name</label>
+                            <input type="email" id="inputName" class="form-control" placeholder="Full Name" v-model="name" required>
+                        </div>
+
+
                         <!--<div class="form-group">-->
                             <!--<label for="inputName">Full name</label>-->
                             <!--<input type="text" id="inputName" class="form-control" placeholder="Full name" v-model="name" required>-->
