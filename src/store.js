@@ -8,10 +8,10 @@ import { db } from './main';
 Vue.use(Vuex);
 
 const tokenAddress = '0xdd23064be80B47BB725774CA11aAD2dd56AF2884';
-const tokenAbi = require('./assets/abi/tokenAbi.json');
+const tokenAbi = require('./assets/abi/tokenAbi');
 
 const crowdsaleAddress = '0x2E9102f2f13EF6401B6D6E5D459D007037A7883C';
-const crowdsaleAbi = require('./assets/abi/contractAbi.json');
+const crowdsaleAbi = require('./assets/abi/crowdsaleAbi');
 
 const bnToString = (bn) => bn[0].toString(10);
 const bnToEther = (bn) => Eth.fromWei(bn[0], 'ether');
@@ -89,10 +89,7 @@ export default new Vuex.Store({
             });
         },
         async ['load-db'] ({commit, dispatch, state, rootState}) {
-            // console.log(db);
-
-            // commit('commit-crowdsale-smart-contract', {
-            // });
+            console.log(db.ref(`network/ropsten`));
         }
     }
 });
