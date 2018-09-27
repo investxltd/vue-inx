@@ -53,7 +53,6 @@
 
 <script>
     import firebase from 'firebase';
-    import ethers from 'ethers';
 
     export default {
         name: 'personal-information',
@@ -77,12 +76,12 @@
         methods: {
             onSubmit (evt) {
                 evt.preventDefault();
-                
+
                 this.errors.name = !!this.form.name;
 
                 try {
                     this.errors.ethAccount = !!this.form.ethAccount;
-                    ethers.utils.getAddress(this.form.ethAccount)
+                    // ethers.utils.getAddress(this.form.ethAccount)
                 } catch (ex) {
                     this.errors.ethAccount = false;
                     this.form.ethAccount = '';

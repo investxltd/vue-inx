@@ -22,11 +22,11 @@
                             <tbody>
                             <tr>
                                 <td>Start Date</td>
-                                <td>{{ new Date(this.crowdsaleData.openingTime).toLocaleDateString() }}</td>
+                                <td>{{ new Date(parseInt(this.crowdsaleData.openingTime)).toLocaleDateString() }}</td>
                             </tr>
                             <tr>
                                 <td>End Date</td>
-                                <td>{{ new Date(this.crowdsaleData.closingTime).toLocaleDateString() }}</td>
+                                <td>{{ new Date(parseInt(this.crowdsaleData.closingTime)).toLocaleDateString() }}</td>
                             </tr>
                             <tr>
                                 <td>Token Symbol</td>

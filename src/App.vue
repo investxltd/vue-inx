@@ -3,8 +3,8 @@
         <div id="app">
             <router-view/>
         </div>
-        <footer class="m-5">
-            <span class="badge badge-light">{{ network }}</span>
+        <footer class="mt-5 mb-5">
+            <span class="badge badge-light float-right">{{ network }}</span>
         </footer>
     </div>
 </template>
@@ -18,6 +18,7 @@
             // Bootstrap
             this.$store.dispatch('load-token-smart-contract');
             this.$store.dispatch('load-crowdsale-smart-contract');
+            this.$store.dispatch('load-db');
         },
         computed: {
             ...mapState([

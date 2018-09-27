@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import ethers from 'ethers';
+import Eth from 'ethjs';
+
+import { db } from './main';
 
 Vue.use(Vuex);
 
@@ -10,6 +12,9 @@ const tokenAbi = require('./assets/abi/tokenAbi.json');
 
 const crowdsaleAddress = '0x2E9102f2f13EF6401B6D6E5D459D007037A7883C';
 const crowdsaleAbi = require('./assets/abi/contractAbi.json');
+
+const bnToString = (bn) => bn[0].toString(10);
+const bnToEther = (bn) => Eth.fromWei(bn[0], 'ether');
 
 export default new Vuex.Store({
     state: {
@@ -48,37 +53,46 @@ export default new Vuex.Store({
     },
     actions: {
         async ['load-token-smart-contract'] ({commit, dispatch, state, rootState}) {
-            const provider = new ethers.providers.InfuraProvider(state.network); // set-up to point at test net
-            const contract = new ethers.Contract(tokenAddress, tokenAbi, provider);
+
+            const eth = new Eth(new Eth.HttpProvider(`https://${state.network}.infura.io`));
+            const contract = eth.contract(tokenAbi).at(tokenAddress);
+
+            console.log(await contract.decimals());
 
             commit('commit-token-smart-contract', {
-                name: await contract.name(),
-                symbol: await contract.symbol(),
-                decimals: await contract.decimals(),
-                founderTokensLockedUntil: (await contract.founderTokensLockedUntil()).toNumber() * 1000,
-                totalSupply: ethers.utils.formatEther((await contract.totalSupply()).toString()),
-                transfersEnabled: await contract.transfersEnabled(),
-                investxPlatform: await contract.investxPlatform()
+                name: (await contract.name())[0],
+                symbol: (await contract.symbol())[0],
+                decimals: bnToString(await contract.decimals()),
+                founderTokensLockedUntil: bnToString(await contract.founderTokensLockedUntil()),
+                totalSupply: bnToEther(await contract.totalSupply()),
+                transfersEnabled: (await contract.transfersEnabled())[0],
+                investxPlatform: (await contract.investxPlatform())[0]
             });
         },
         async ['load-crowdsale-smart-contract'] ({commit, dispatch, state, rootState}) {
-            const provider = new ethers.providers.InfuraProvider(state.network); // set-up to point at test net
-            const contract = new ethers.Contract(crowdsaleAddress, crowdsaleAbi, provider);
+            const eth = new Eth(new Eth.HttpProvider(`https://${state.network}.infura.io`));
+            const contract = eth.contract(crowdsaleAbi).at(crowdsaleAddress);
 
             commit('commit-crowdsale-smart-contract', {
-                openingTime: (await contract.openingTime()).toNumber() * 1000,
-                token: await contract.token(),
-                wallet: await contract.wallet(),
-                raisedInEther: ethers.utils.formatEther((await contract.weiRaised()).toString(10)),
-                rate: (await contract.rate()).toNumber(),
-                minContributionInEther: ethers.utils.formatEther((await contract.minContribution()).toString(10)),
-                inPreSale: await contract.inPreSale(),
-                preSaleRate: (await contract.preSaleRate()).toNumber(),
-                isCrowdsaleOpen: await contract.isCrowdsaleOpen(),
-                closingTime: (await contract.closingTime()).toNumber() * 1000,
-                owner: await contract.owner(),
-                paused: await contract.paused()
+                openingTime: bnToString(await contract.openingTime()),
+                token: (await contract.token())[0],
+                wallet: (await contract.wallet())[0],
+                raisedInEther: bnToEther(await contract.weiRaised()),
+                rate: bnToString(await contract.rate()),
+                minContributionInEther: bnToEther(await contract.minContribution()),
+                inPreSale: bnToString(await contract.inPreSale()),
+                preSaleRate: bnToString(await contract.preSaleRate()),
+                isCrowdsaleOpen: (await contract.isCrowdsaleOpen())[0],
+                closingTime: bnToString(await contract.closingTime()),
+                owner: (await contract.owner())[0],
+                paused: (await contract.paused())[0]
             });
+        },
+        async ['load-db'] ({commit, dispatch, state, rootState}) {
+            // console.log(db);
+
+            // commit('commit-crowdsale-smart-contract', {
+            // });
         }
     }
 });

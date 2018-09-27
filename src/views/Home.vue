@@ -70,7 +70,15 @@
                         <p class="card-text">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </p>
-                        <div slot="footer">Telegram | Twitter | FaceBook | Medium</div>
+                        <div slot="footer">
+                            <a href="https://t.me/investxtoken" target="_blank"><img src="../assets/images/social/telegram.png"/></a>
+                            <a href="https://twitter.com/InvestxLtd" target="_blank"><img src="../assets/images/social/twitter.png"/></a>
+                            <a href="https://www.facebook.com/InvestxLtd/" target="_blank"><img src="../assets/images/social/facebook.png"/></a>
+                            <a href="https://medium.com/investxltd" target="_blank"><img src="../assets/images/social/medium.png"/></a>
+                            <a href="https://www.linkedin.com/company/investx/" target="_blank"><img src="../assets/images/social/linkedin.png"/></a>
+                            <!--<a href="https://www.linkedin.com/company/investx/" target="_blank"><img src="../assets/images/social/reddit.png"/></a>-->
+                            <a href="https://bitcointalk.org/index.php?topic=5033458.0" target="_blank"><img src="../assets/images/social/bitcoin.png"/></a>
+                        </div>
                     </b-card>
                 </div>
             </div>
@@ -82,7 +90,7 @@
     // @ is an alias to /src
     import Sidebar from '@/components/Sidebar';
     import firebase from 'firebase';
-    import {mapState} from 'vuex';
+    import { mapState } from 'vuex';
 
     export default {
         name: 'home',
