@@ -13,18 +13,21 @@
                     <kyc-progress></kyc-progress>
                 </div>
                 <div class="col">
-                    <b-card title="KYC and AML" sub-title="Regulation and why it is required" class="shadow-sm">
+                    <b-card title="KYC and AML" sub-title="Legislation and why it is required" class="shadow-sm">
                         <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                            Due to current legislation all ICO investors, will need to pass KYC verification to get future access to the platform.
                         </p>
                         <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                            That is why we have decided to collaborate with Confirm for this process so it will be fast and secure!
                         </p>
                         <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                            Simply follow the steps after clicking on the link. It should not take more than a few minutes to complete.
+                        </p>
+                        <p class="card-text">
+                            All investors, including <strong>pre-sale</strong> contributors, must pass it before they can access the platform.
                         </p>
                         <div slot="footer">
-                            <router-link to="/token-sale" class="card-link">Read more</router-link>
+                            <router-link to="/token-sale" class="card-link">Read more about our KYC process</router-link>
                         </div>
                     </b-card>
                 </div>

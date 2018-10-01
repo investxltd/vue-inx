@@ -7,10 +7,8 @@ import { db } from './main';
 
 Vue.use(Vuex);
 
-const tokenAddress = '0xdd23064be80B47BB725774CA11aAD2dd56AF2884';
 const tokenAbi = require('./assets/abi/tokenAbi');
 
-const crowdsaleAddress = '0x2E9102f2f13EF6401B6D6E5D459D007037A7883C';
 const crowdsaleAbi = require('./assets/abi/crowdsaleAbi');
 
 const bnToString = (bn) => bn[0].toString(10);
@@ -39,7 +37,13 @@ export default new Vuex.Store({
             isCrowdsaleOpen: null,
             closingTime: null,
             owner: null,
-            paused: null,
+            paused: null
+        },
+        db: {
+            crowdsaleAbi: null,
+            crowdsaleAddress: null,
+            tokenAbi: null,
+            tokenAddress: null
         },
         network: 'ropsten'
     },
@@ -50,14 +54,20 @@ export default new Vuex.Store({
         ['commit-crowdsale-smart-contract'] (state, crowdsaleData) {
             state.crowdsaleData = {...crowdsaleData};
         },
+        ['commit-db'] (state, db) {
+            state.db = {...db};
+        }
     },
     actions: {
+        async ['bootstrap'] ({commit, dispatch, state, rootState}) {
+            await dispatch('load-db');
+            dispatch('load-token-smart-contract');
+            dispatch('load-crowdsale-smart-contract');
+        },
         async ['load-token-smart-contract'] ({commit, dispatch, state, rootState}) {
 
             const eth = new Eth(new Eth.HttpProvider(`https://${state.network}.infura.io`));
-            const contract = eth.contract(tokenAbi).at(tokenAddress);
-
-            console.log(await contract.decimals());
+            const contract = eth.contract(tokenAbi).at(state.db.tokenAddress);
 
             commit('commit-token-smart-contract', {
                 name: (await contract.name())[0],
@@ -71,7 +81,7 @@ export default new Vuex.Store({
         },
         async ['load-crowdsale-smart-contract'] ({commit, dispatch, state, rootState}) {
             const eth = new Eth(new Eth.HttpProvider(`https://${state.network}.infura.io`));
-            const contract = eth.contract(crowdsaleAbi).at(crowdsaleAddress);
+            const contract = eth.contract(crowdsaleAbi).at(state.db.crowdsaleAddress);
 
             commit('commit-crowdsale-smart-contract', {
                 openingTime: bnToString(await contract.openingTime()),
@@ -89,7 +99,10 @@ export default new Vuex.Store({
             });
         },
         async ['load-db'] ({commit, dispatch, state, rootState}) {
-            console.log(db.ref(`network/ropsten`));
+            await db.ref(`network/${state.network}`).once('value',
+                (snapshot) => commit('commit-db', snapshot.val()),
+                (errorObject) => console.error('The read failed: ' + errorObject.code)
+            );
         }
     }
 });

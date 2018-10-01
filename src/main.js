@@ -34,7 +34,7 @@ firebase.auth().onAuthStateChanged(function () {
     }
 });
 
-export const db = firebase.database()
+export const db = firebase.database();
 
 
 

@@ -15,10 +15,7 @@
     export default {
         name: 'app',
         mounted () {
-            // Bootstrap
-            this.$store.dispatch('load-token-smart-contract');
-            this.$store.dispatch('load-crowdsale-smart-contract');
-            this.$store.dispatch('load-db');
+            this.$store.dispatch('bootstrap');
         },
         computed: {
             ...mapState([
@@ -40,6 +37,10 @@
     h3 {
         font-size: 1.1rem;
         color: $secondary;
+    }
+
+    code {
+        color: $primary;
     }
 
     #app {

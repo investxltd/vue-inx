@@ -8,22 +8,22 @@
 
             <hr/>
 
-            <b-alert show variant="warning" v-if="!this.currentUser.photoURL">
-                Please update you Ethereum address so we can start the KYC process.
-                <router-link to="/settings" class="alert-link">Account Settings</router-link>
-            </b-alert>
+
 
             <div class="row">
                 <div class="col">
-                    <b-card title="KYC" sub-title="Completing KYC and AML" class="shadow-sm">
+                    <b-card title="Up Next" sub-title="Completing KYC and AML" class="shadow-sm">
                         <p class="card-text">
                             All participants in the ICO <span class="text-bold">must</span> be verified by our KYC provider.
                         </p>
-                        <p class="card-text">
+
+                        <b-alert show variant="warning" v-if="!this.currentUser.photoURL">
                             Please update you Ethereum address so we can start the KYC process.
-                        </p>
+                            <router-link to="/settings" class="alert-link">Account Settings</router-link>
+                        </b-alert>
+
                         <div slot="footer">
-                            <a href="#" class="card-link">Start KYC</a>
+                            <a href="#" class="card-link">Jump to KYC</a>
                         </div>
                     </b-card>
                 </div>
@@ -67,9 +67,6 @@
                 </div>
                 <div class="col">
                     <b-card title="Social" sub-title="Be part of the conversation" class="shadow-sm">
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </p>
                         <div slot="footer">
                             <a href="https://t.me/investxtoken" target="_blank"><img src="../assets/images/social/telegram.png"/></a>
                             <a href="https://twitter.com/InvestxLtd" target="_blank"><img src="../assets/images/social/twitter.png"/></a>

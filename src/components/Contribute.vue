@@ -22,7 +22,7 @@
         </p>
 
         <div class="text-center contract-address">
-            <code>0x0f35cBA9Cbdf6982d65C485eE9958937C11b59a9</code>
+            <code>{{ db.crowdsaleAddress }}</code>
         </div>
     </b-card>
 </template>
@@ -30,6 +30,7 @@
 
 <script>
     import firebase from 'firebase';
+    import {mapState} from 'vuex';
 
     export default {
         name: 'contribute',
@@ -48,6 +49,11 @@
             onSubmit (evt) {
                 evt.preventDefault();
             }
+        },
+        computed: {
+            ...mapState([
+                'db'
+            ])
         }
     };
 </script>

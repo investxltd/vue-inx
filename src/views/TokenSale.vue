@@ -9,8 +9,13 @@
             <hr/>
 
             <div class="row">
-                <div class="col d-flex justify-content-sm-center">
+                <div class="col">
                     <contribute></contribute>
+                </div>
+                <div class="col">
+                    <b-card title="INX Calculator" sub-title="Use the calculator to compute an estimation of the INX you will receive" class="shadow-sm">
+                        <p class="card-text"></p>
+                    </b-card>
                 </div>
             </div>
 
@@ -69,9 +74,7 @@
                     </b-card>
                 </div>
                 <div class="col">
-                    <b-card title="INX Calculator" sub-title="Use the calculator to compute an estimation of the INX you will receive" class="shadow-sm">
-                        <p class="card-text"></p>
-                    </b-card>
+
                 </div>
             </div>
         </div>

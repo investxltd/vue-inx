@@ -7,11 +7,10 @@
             must pass it before they can access the platform.
         </p>
 
-        <p class="card-text" v-if="!currentUser.photoURL">
-            <span class="text-danger">We can start KYC once we have an email and ETH wallet.</span>
-            Please provide your ETH wallet via
-            <router-link to="/settings">Account Settings</router-link>
-        </p>
+        <b-alert show variant="warning" v-if="!this.currentUser.photoURL">
+            Please update you Ethereum address so we can start the KYC process.
+            <router-link to="/settings" class="alert-link">Account Settings</router-link>
+        </b-alert>
 
         <p class="card-text" v-else>
             We will start KYC with the provided email of <code>{{ currentUser.email }}</code> and the ETH wallet of <code>{{ currentUser.photoURL }}</code>
