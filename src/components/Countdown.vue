@@ -123,19 +123,16 @@
     }
 
     .vuejs-countdown .digit {
-        font-size: 32px;
+        font-size: 48px;
         font-weight: 600;
         line-height: 1.4;
         margin-bottom: 0;
+        color: $primary;
     }
 
     .vuejs-countdown .text {
         text-transform: uppercase;
         margin-bottom: 0;
         font-size: 10px;
-    }
-
-    .digit {
-        color: $primary;
     }
 </style>
