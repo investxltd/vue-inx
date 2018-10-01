@@ -1,11 +1,25 @@
 <template>
     <b-card title="KYC progress" sub-title="" class="shadow-sm">
 
-        <p class="card-text">
-            Due to current legislation all ICO investors, will need to pass KYC verification to get future access to the platform. That is why we have decided to collaborate with XYZ for this process
-            so it will be fast and secure! Simply follow the steps on following link to complete it easily. It will not take more than a few minutes. All investors, including PRESALE contributors,
-            must pass it before they can access the platform.
-        </p>
+        <div class="card-body text-center">
+            <div class="circle-wrap">
+                <div class="circle complete">1</div>
+                <!--<div class="circle-label">Initiate</div>-->
+            </div>
+            <div class="circle-wrap">
+                <div class="circle complete">2</div>
+                <!--<div class="circle-label">Submit</div>-->
+            </div>
+            <div class="circle-wrap">
+                <div class="circle complete">3</div>
+                <!--<div class="circle-label">Process</div>-->
+            </div>
+            <div class="circle-wrap">
+                <div class="circle complete">4</div>
+                <!--<div class="circle-label">Contribute!</div>-->
+            </div>
+        </div>
+
 
         <b-alert show variant="warning" v-if="!this.currentUser.photoURL">
             Please update you Ethereum address so we can start the KYC process.
@@ -50,4 +64,38 @@
 <style scoped lang="scss">
     @import '../assets/scss/inx-colours.scss';
 
+    .circle-wrap {
+        display: inline-flex;
+        font-size: 0.75rem;
+        margin: 10px;
+        text-align: center;
+        flex-direction: row;
+    }
+
+    .circle {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        border-radius: 50%; /* the magic */
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        text-align: center;
+        color: $white;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 700;
+        background-color: $secondary;
+    }
+
+    .circle-label {
+        margin-top: 15px;
+    }
+
+    .complete {
+        background-color: $primary;
+    }
+
+    .error {
+        background-color: red;
+    }
 </style>
