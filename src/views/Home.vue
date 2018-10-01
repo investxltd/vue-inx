@@ -8,7 +8,6 @@
 
             <hr/>
 
-
             <div class="row">
                 <div class="col">
                     <b-card title="Up Next" sub-title="Completing KYC and AML" class="shadow-sm">
@@ -28,6 +27,9 @@
                 </div>
                 <div class="col">
                     <b-card title="Token Sale" sub-title="Steps to contribution" class="shadow-sm">
+                        <p class="card-text text-center">
+                            <countdown></countdown>
+                        </p>
                         <p class="card-text">
                             Once you have passed our <em>KYC</em> process you can contribute and purchase INX tokens.
                         </p>
@@ -87,10 +89,11 @@
     import Sidebar from '@/components/Sidebar';
     import firebase from 'firebase';
     import { mapState, mapGetters } from 'vuex';
+    import Countdown from '@/components/Countdown';
 
     export default {
         name: 'home',
-        components: {Sidebar},
+        components: {Countdown, Sidebar},
         data () {
             return {
                 currentUser: firebase.auth().currentUser
