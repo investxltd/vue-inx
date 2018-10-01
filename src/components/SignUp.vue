@@ -9,29 +9,30 @@
                         </div>
                         <h5 class="card-title text-center">Register</h5>
 
-                        <div class="form-group">
-                            <label for="inputEmail">Email address</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="email" required autofocus>
-                        </div>
+                        <form novalidate autocomplete="off">
+                            <div class="form-group">
+                                <label for="inputEmail">Email address</label>
+                                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="email" required autofocus>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="inputName">Full Name</label>
-                            <input type="email" id="inputName" class="form-control" placeholder="Full Name" v-model="name" required>
-                        </div>
+                            <div class="form-group">
+                                <label for="inputName">Full Name</label>
+                                <input type="email" id="inputName" class="form-control" placeholder="Full Name" v-model="name" required>
+                            </div>
 
 
-                        <!--<div class="form-group">-->
+                            <!--<div class="form-group">-->
                             <!--<label for="inputName">Full name</label>-->
                             <!--<input type="text" id="inputName" class="form-control" placeholder="Full name" v-model="name" required>-->
-                        <!--</div>-->
+                            <!--</div>-->
 
-                        <div class="form-group">
-                            <label for="inputPassword">Password</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" v-model="password" required>
-                        </div>
+                            <div class="form-group">
+                                <label for="inputPassword">Password</label>
+                                <input type="password" id="inputPassword" class="form-control" placeholder="Password" v-model="password" required>
+                            </div>
 
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" v-on:click="signUp">Register</button>
-
+                            <button class="btn btn-lg btn-primary btn-block" type="submit" v-on:click="signUp">Register</button>
+                        </form>
                         <hr class="my-4">
 
                         <p>
@@ -61,7 +62,11 @@
             signUp: function () {
                 firebase.auth()
                     .createUserWithEmailAndPassword(this.email, this.password)
-                    .then((/*user*/) => this.$router.replace('home'))
+                    .then((credential) => credential.user.updateProfile({
+                        displayName: this.name,
+                        photoURL: ''
+                    }))
+                    .then(() => this.$router.replace('home'))
                     .catch((err) => console.error('Oops. ' + err.message));
             }
         }

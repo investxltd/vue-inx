@@ -25,10 +25,10 @@
 
                         <hr class="my-4">
 
-                        <!--<button class="btn btn-lg btn-google btn-block"><i class="fab fa-google mr-2"></i> Sign in with Google</button>-->
+                        <button class="btn btn-lg btn-google btn-block" v-on:click="googleSignIn"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
                         <!--<button class="btn btn-lg btn-facebook btn-block"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>-->
 
-                        <!--<hr class="my-4">-->
+                        <hr class="my-4">
 
                         <p>
                             You don't have an account? You can
@@ -56,6 +56,12 @@
             signIn: function () {
                 firebase.auth()
                     .signInWithEmailAndPassword(this.email, this.password)
+                    .then((/*user*/) => this.$router.replace('home'))
+                    .catch((err) => console.error('Oops. ' + err.message));
+            },
+            googleSignIn: function () {
+                const provider = new firebase.auth.GoogleAuthProvider();
+                firebase.auth().signInWithPopup(provider)
                     .then((/*user*/) => this.$router.replace('home'))
                     .catch((err) => console.error('Oops. ' + err.message));
             }

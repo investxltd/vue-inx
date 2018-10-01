@@ -14,7 +14,9 @@
                 </div>
                 <div class="col">
                     <b-card title="INX Calculator" sub-title="Use the calculator to compute an estimation of the INX you will receive" class="shadow-sm">
-                        <p class="card-text"></p>
+                        <p class="card-body">
+
+                        </p>
                     </b-card>
                 </div>
             </div>
