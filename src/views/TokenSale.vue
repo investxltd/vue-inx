@@ -13,11 +13,7 @@
                     <contribute></contribute>
                 </div>
                 <div class="col">
-                    <b-card title="INX Calculator" sub-title="Use the calculator to compute an estimation of the INX you will receive" class="shadow-sm">
-                        <p class="card-body">
-
-                        </p>
-                    </b-card>
+                    <calc></calc>
                 </div>
             </div>
 
@@ -83,11 +79,12 @@
     // @ is an alias to /src
     import Sidebar from '@/components/Sidebar';
     import Contribute from '@/components/Contribute';
+    import Calc from '@/components/Calc';
     import {mapState} from 'vuex';
 
     export default {
         name: 'token-sale',
-        components: {Sidebar, Contribute},
+        components: {Sidebar, Contribute, Calc},
         data () {
             return {
 

@@ -1,7 +1,7 @@
 <template>
     <b-card title="Contribute to the Token Sale" sub-title="Send the investment through your whitelisted ETH wallet" class="shadow-sm">
 
-        <b-form @submit="onSubmit" v-if="show" novalidate class="">
+        <b-form @submit="onSubmit" novalidate class="">
 
             <b-form-group id="range-amount-group"
                           label="ETH contribution"
@@ -40,7 +40,6 @@
                 form: {
                     amount: 1
                 },
-                show: true,
                 min: 0.1,
                 max: 100.0
             };

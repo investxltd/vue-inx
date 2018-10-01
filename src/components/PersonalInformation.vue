@@ -8,7 +8,7 @@
             Personal information updated
         </b-alert>
 
-        <b-form @submit="onSubmit" v-if="show" novalidate>
+        <b-form @submit="onSubmit" novalidate>
             <b-form-group id="email-group"
                           label="Email address:"
                           label-for="email"
@@ -72,7 +72,6 @@
                     name: !!user.displayName,
                     ethAccount: !!user.photoURL
                 },
-                show: true,
                 dismissSecs: 3,
                 dismissCountDown: 0
             };
