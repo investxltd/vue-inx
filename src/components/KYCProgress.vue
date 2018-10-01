@@ -4,19 +4,19 @@
         <div class="card-body text-center">
             <div class="circle-wrap">
                 <div class="circle complete">1</div>
-                <!--<div class="circle-label">Initiate</div>-->
+                <div class="circle-label">Initiate</div>
             </div>
             <div class="circle-wrap">
-                <div class="circle complete">2</div>
-                <!--<div class="circle-label">Submit</div>-->
+                <div class="circle todo">2</div>
+                <div class="circle-label">Submit</div>
             </div>
             <div class="circle-wrap">
-                <div class="circle complete">3</div>
-                <!--<div class="circle-label">Process</div>-->
+                <div class="circle todo">3</div>
+                <div class="circle-label">Process</div>
             </div>
             <div class="circle-wrap">
-                <div class="circle complete">4</div>
-                <!--<div class="circle-label">Contribute!</div>-->
+                <div class="circle todo">4</div>
+                <div class="circle-label">Contribute!</div>
             </div>
         </div>
 
@@ -69,7 +69,7 @@
         font-size: 0.75rem;
         margin: 10px;
         text-align: center;
-        flex-direction: row;
+        flex-direction: column;
     }
 
     .circle {
@@ -93,6 +93,10 @@
 
     .complete {
         background-color: $primary;
+    }
+
+    .todo {
+        background-color: $secondary;
     }
 
     .error {
