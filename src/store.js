@@ -104,5 +104,15 @@ export default new Vuex.Store({
                 (errorObject) => console.error('The read failed: ' + errorObject.code)
             );
         }
+    },
+    getters: {
+        currentRate: (state) => () => {
+            if (state.crowdsaleData.preSaleRate && state.crowdsaleData.inPreSale) {
+                return state.crowdsaleData.preSaleRate;
+            } else if (state.crowdsaleData.rate) {
+                return state.crowdsaleData.rate;
+            }
+            return null;
+        }
     }
 });

@@ -9,7 +9,6 @@
             <hr/>
 
 
-
             <div class="row">
                 <div class="col">
                     <b-card title="Up Next" sub-title="Completing KYC and AML" class="shadow-sm">
@@ -33,7 +32,7 @@
                             Once you have passed our <em>KYC</em> process you can contribute and purchase INX tokens.
                         </p>
                         <p class="card-text" v-if="crowdsaleData.isCrowdsaleOpen">
-                            The current rate of INX tokens per ETH is <strong>{{ crowdsaleData.rate }}</strong>.
+                            The current rate of INX tokens per ETH is <strong>{{ currentRate() }}</strong>.
                         </p>
                         <p class="card-text" v-else>
                             <em>The Investx token sale is not currently open.</em>
@@ -87,7 +86,7 @@
     // @ is an alias to /src
     import Sidebar from '@/components/Sidebar';
     import firebase from 'firebase';
-    import { mapState } from 'vuex';
+    import { mapState, mapGetters } from 'vuex';
 
     export default {
         name: 'home',
@@ -101,6 +100,9 @@
             ...mapState([
                 'tokenData',
                 'crowdsaleData'
+            ]),
+            ...mapGetters([
+                'currentRate'
             ])
         }
     };

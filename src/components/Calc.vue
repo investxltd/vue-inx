@@ -1,7 +1,7 @@
 <template>
     <b-card title="INX Calculator" sub-title="Use the calculator to compute an estimation of the INX you will receive" class="shadow-sm">
         <p class="card-text">
-            The current rate is <strong>{{ crowdsaleData.rate }}</strong> INX per ETH
+            The current rate is <strong>{{ currentRate() }}</strong> INX per ETH
         </p>
         <b-form inline novalidate>
             <b-input
@@ -32,7 +32,7 @@
 
 <script>
 
-    import { mapState } from 'vuex';
+    import { mapGetters } from 'vuex';
 
     export default {
         name: 'calc',
@@ -49,26 +49,16 @@
         methods: {
             doCalc: function (evt) {
                 evt.preventDefault();
-
-                console.log(`${this.form.eth} -> ${this.form.inx}`);
-
-                this.form.inx = (parseFloat(this.form.eth) * parseFloat(this.crowdsaleData.rate)).toFixed(3);
-
-                console.log(`${this.form.eth} -> ${this.form.inx}`);
+                this.form.inx = (parseFloat(this.form.eth) * parseFloat(this.currentRate())).toFixed(3);
             },
             doReverseCalc: function (evt) {
                 evt.preventDefault();
-
-                console.log(`${this.form.eth} -> ${this.form.inx}`);
-
-                this.form.eth = (parseFloat(this.form.inx) / parseFloat(this.crowdsaleData.rate)).toFixed(3);
-
-                console.log(`${this.form.eth} -> ${this.form.inx}`);
+                this.form.eth = (parseFloat(this.form.inx) / parseFloat(this.currentRate())).toFixed(3);
             }
         },
         computed: {
-            ...mapState([
-                'crowdsaleData'
+            ...mapGetters([
+                'currentRate'
             ])
         }
     };
