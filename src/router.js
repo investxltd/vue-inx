@@ -10,6 +10,7 @@ import KYC from '@/views/KYC';
 
 import Login from '@/components/Login';
 import SignUp from '@/components/SignUp';
+import Forgot from '@/components/Forgot';
 
 Vue.use(Router);
 
@@ -70,6 +71,11 @@ let router = new Router({
             path: '/register',
             name: 'register',
             component: SignUp
+        },
+        {
+            path: '/forgot',
+            name: 'forgot',
+            component: Forgot
         }
     ]
 });

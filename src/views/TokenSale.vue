@@ -69,10 +69,6 @@
                             </tr>
                             </tbody>
                         </table>
-
-                        <div slot="footer">
-                            <router-link to="/token-sale" class="card-link">Read more</router-link>
-                        </div>
                     </b-card>
                 </div>
                 <div class="col">

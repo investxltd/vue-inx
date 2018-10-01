@@ -13,18 +13,19 @@
                     <personal-information></personal-information>
                 </div>
                 <div class="col">
-                    <b-card title="Why we need this information" sub-title="Explanation of how we handle your data" class="shadow-sm">
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                        <div slot="footer">
-                            <router-link to="/token-sale" class="card-link">Read more</router-link>
+                    <b-card title="Reset Password" sub-title="" class="shadow-sm">
+                        <div v-if="!message">
+                            <div class="form-group">
+                                <label for="inputEmail">Email address</label>
+                                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="email" required :disabled="true" :state="true">
+                            </div>
+
+                            <button class="btn btn-primary btn-block" v-on:click="forgot">Send reset password email</button>
+                        </div>
+                        <div v-else>
+                            <b-alert show variant="warning">
+                                {{ message }}
+                            </b-alert>
                         </div>
                     </b-card>
                 </div>
@@ -37,10 +38,25 @@
     // @ is an alias to /src
     import Sidebar from '@/components/Sidebar';
     import PersonalInformation from '@/components/PersonalInformation';
+    import firebase from 'firebase';
 
     export default {
         name: 'settings',
-        components: {Sidebar, PersonalInformation}
+        components: {Sidebar, PersonalInformation},
+        data () {
+            const user = firebase.auth().currentUser;
+            return {
+                email: user.email,
+                message: ''
+            };
+        },
+        methods: {
+            forgot: function () {
+                firebase.auth().sendPasswordResetEmail(this.email)
+                    .then((/*user*/) => this.message = 'Reset password email sent')
+                    .catch((err) => console.error('Oops. ' + err.message));
+            }
+        }
     };
 </script>
 

@@ -12,7 +12,7 @@
             <b-form-group id="email-group"
                           label="Email address:"
                           label-for="email"
-                          description="We'll never share your email with anyone else.">
+                          description="We will never share your email with anyone else.">
                 <b-form-input id="email"
                               type="email"
                               v-model="form.email"
@@ -21,6 +21,8 @@
                               :disabled="true"
                               :state="true">
                 </b-form-input>
+                <b-form-invalid-feedback :force-show="!form.emailVerified">Email not verified</b-form-invalid-feedback>
+                <b-form-valid-feedback :force-show="form.emailVerified">Email verified</b-form-valid-feedback>
             </b-form-group>
             <b-form-group id="name-group"
                           label="Name:"
@@ -57,16 +59,18 @@
     export default {
         name: 'personal-information',
         data () {
+            const user = firebase.auth().currentUser;
             return {
                 form: {
-                    email: firebase.auth().currentUser.email,
-                    name: firebase.auth().currentUser.displayName,
-                    ethAccount: firebase.auth().currentUser.photoURL
+                    email: user.email,
+                    name: user.displayName,
+                    ethAccount: user.photoURL,
+                    emailVerified: user.emailVerified
                 },
                 errors: {
-                    email: !!firebase.auth().currentUser.email,
-                    name: !!firebase.auth().currentUser.displayName,
-                    ethAccount: !!firebase.auth().currentUser.photoURL
+                    email: !!user.email,
+                    name: !!user.displayName,
+                    ethAccount: !!user.photoURL
                 },
                 show: true,
                 dismissSecs: 3,
@@ -78,14 +82,7 @@
                 evt.preventDefault();
 
                 this.errors.name = !!this.form.name;
-
-                try {
-                    this.errors.ethAccount = !!this.form.ethAccount;
-                    // ethers.utils.getAddress(this.form.ethAccount)
-                } catch (ex) {
-                    this.errors.ethAccount = false;
-                    this.form.ethAccount = '';
-                }
+                this.errors.ethAccount = !!this.form.ethAccount;
 
                 firebase.auth().currentUser
                     .updateProfile({

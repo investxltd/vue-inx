@@ -8,25 +8,23 @@
                             <img alt="Investx" src="../assets/inx_logo.png" class="inx-logo"/>
                         </div>
                         <h5 class="card-title text-center">
-                            Sign In
+                            Forgot password
                         </h5>
 
-                        <div class="form-group">
-                            <label for="inputEmail">Email address</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="email" required autofocus>
+                        <div v-if="!message">
+                            <div class="form-group">
+                                <label for="inputEmail">Email address</label>
+                                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="email" required autofocus>
+                            </div>
+
+                            <button class="btn btn-lg btn-primary btn-block" v-on:click="forgot">Send reset email</button>
                         </div>
-
-                        <div class="form-group">
-                            <label for="inputPassword">Password</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" v-model="password" required>
+                        <div v-else>
+                            <b-alert show variant="warning">
+                                {{ message }}
+                                <router-link to="/login" class="alert-link">Sign in</router-link>
+                            </b-alert>
                         </div>
-
-                        <button class="btn btn-lg btn-primary btn-block" v-on:click="signIn">Sign in</button>
-
-                        <hr class="my-4">
-
-                        <button class="btn btn-lg btn-google btn-block" v-on:click="googleSignIn"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
-                        <!--<button class="btn btn-lg btn-facebook btn-block"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>-->
 
                         <hr class="my-4">
 
@@ -35,7 +33,8 @@
                             <router-link to="/register">Register</router-link>
                         </p>
                         <p>
-                            <router-link to="/forgot">Forgot password?</router-link>
+                            Or go back to
+                            <router-link to="/login">Sign in</router-link>
                         </p>
                     </div>
                 </div>
@@ -48,24 +47,17 @@
     import firebase from 'firebase';
 
     export default {
-        name: 'login',
+        name: 'forgot',
         data: function () {
             return {
                 email: '',
-                password: ''
+                message: ''
             };
         },
         methods: {
-            signIn: function () {
-                firebase.auth()
-                    .signInWithEmailAndPassword(this.email, this.password)
-                    .then((/*user*/) => this.$router.replace('home'))
-                    .catch((err) => console.error('Oops. ' + err.message));
-            },
-            googleSignIn: function () {
-                const provider = new firebase.auth.GoogleAuthProvider();
-                firebase.auth().signInWithPopup(provider)
-                    .then((/*user*/) => this.$router.replace('home'))
+            forgot: function () {
+                firebase.auth().sendPasswordResetEmail(this.email)
+                    .then((/*user*/) => this.message = 'Password reset email sent')
                     .catch((err) => console.error('Oops. ' + err.message));
             }
         }
