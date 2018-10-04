@@ -3,6 +3,8 @@ import Vuex from 'vuex';
 
 import Eth from 'ethjs';
 
+import firebase from 'firebase';
+
 import { db } from './main';
 
 Vue.use(Vuex);
@@ -45,7 +47,8 @@ export default new Vuex.Store({
             tokenAbi: null,
             tokenAddress: null
         },
-        network: 'ropsten'
+        network: 'ropsten',
+        userData: null
     },
     mutations: {
         ['commit-token-smart-contract'] (state, tokenData) {
@@ -56,6 +59,9 @@ export default new Vuex.Store({
         },
         ['commit-db'] (state, db) {
             state.db = {...db};
+        },
+        ['commit-user-data'] (state, userData) {
+            state.userData = userData
         }
     },
     actions: {
@@ -63,6 +69,9 @@ export default new Vuex.Store({
             await dispatch('load-db');
             dispatch('load-token-smart-contract');
             dispatch('load-crowdsale-smart-contract');
+            if (firebase.auth().currentUser) {
+                dispatch('load-user-data', firebase.auth().currentUser.uid);
+            }
         },
         async ['load-token-smart-contract'] ({commit, dispatch, state, rootState}) {
 
@@ -101,6 +110,14 @@ export default new Vuex.Store({
         async ['load-db'] ({commit, dispatch, state, rootState}) {
             await db.ref(`network/${state.network}`).once('value',
                 (snapshot) => commit('commit-db', snapshot.val()),
+                (errorObject) => console.error('The read failed: ' + errorObject.code)
+            );
+        },
+        async ['load-user-data'] ({commit, dispatch, state, rootState}, uid) {
+            // FIXME can we call this multiple times - handle listeners?
+            const userDb = db.ref(`users/${uid}`);
+            userDb.on('value',
+                (snapshot) => commit('commit-user-data', snapshot.val()),
                 (errorObject) => console.error('The read failed: ' + errorObject.code)
             );
         }

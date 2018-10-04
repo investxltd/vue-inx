@@ -59,13 +59,19 @@
             signIn: function () {
                 firebase.auth()
                     .signInWithEmailAndPassword(this.email, this.password)
-                    .then((/*user*/) => this.$router.replace('home'))
+                    .then((user) => {
+                        this.$store.dispatch('load-user-data', user.user.uid);
+                        return this.$router.replace('home')
+                    })
                     .catch((err) => console.error('Oops. ' + err.message));
             },
             googleSignIn: function () {
                 const provider = new firebase.auth.GoogleAuthProvider();
                 firebase.auth().signInWithPopup(provider)
-                    .then((/*user*/) => this.$router.replace('home'))
+                    .then((user) => {
+                        this.$store.dispatch('load-user-data', user.user.uid);
+                        return this.$router.replace('home')
+                    })
                     .catch((err) => console.error('Oops. ' + err.message));
             }
         }

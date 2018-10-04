@@ -22,6 +22,7 @@
         methods: {
             logout: function () {
                 firebase.auth().signOut().then(() => {
+                    this.$store.commit('commit-user-data', null);
                     this.$router.replace('login');
                 });
             }

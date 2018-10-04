@@ -62,7 +62,10 @@
                         }),
                         credential.user.sendEmailVerification()])
                     )
-                    .then(() => this.$router.replace('home'))
+                    .then(() => {
+                        this.$store.dispatch('load-user-data', firebase.auth().currentUser.uid);
+                        this.$router.replace('home')
+                    })
                     .catch((err) => console.error('Oops. ' + err.message));
             }
         }

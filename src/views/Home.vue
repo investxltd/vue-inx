@@ -53,17 +53,32 @@
             <div class="row mt-5">
                 <div class="col">
                     <b-card title="Receive News" sub-title="Keep up-to-date with all the latest Investx news" class="shadow-sm">
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </p>
-                        <div slot="footer">
-                            <b-button-group class="mx-1">
-                                <b-button size="sm" variant="primary">Send me the news</b-button>
+                        <p class="card-text" v-if="userData && userData.marketing">
+                            You are currently opted in to receive news.
+                            <br/>
+                            <b-button-group class="mx-1 mt-3">
+                                <b-button size="sm" variant="outline-secondary" v-on:click="optOut">Opt out</b-button>
                             </b-button-group>
-                            <b-button-group class="mx-1">
+                        </p>
+
+                        <p class="card-text" v-else-if="userData && !userData.marketing">
+                            You are currently <strong>not</strong> opted in to receive news.
+                            <br/>
+                            <b-button-group class="mx-1 mt-3">
+                                <b-button size="sm" variant="primary" v-on:click="optIn">Send me the news</b-button>
+                            </b-button-group>
+                        </p>
+
+                        <b-alert show variant="warning" v-else>
+                            Please select your news preference
+                            <br/>
+                            <b-button-group class="mx-1 mt-3">
+                                <b-button size="sm" variant="primary" v-on:click="optIn">Send me the news</b-button>
+                            </b-button-group>
+                            <b-button-group class="mx-1 mt-3">
                                 <b-button size="sm" variant="outline-secondary">No thanks</b-button>
                             </b-button-group>
-                        </div>
+                        </b-alert>
                     </b-card>
                 </div>
                 <div class="col">
@@ -90,6 +105,7 @@
     import firebase from 'firebase';
     import { mapState, mapGetters } from 'vuex';
     import Countdown from '@/components/Countdown';
+    import { db } from '../main';
 
     export default {
         name: 'home',
@@ -102,11 +118,24 @@
         computed: {
             ...mapState([
                 'tokenData',
-                'crowdsaleData'
+                'crowdsaleData',
+                'userData'
             ]),
             ...mapGetters([
                 'currentRate'
             ])
+        },
+        methods: {
+            optIn: function () {
+                db.ref('users/' + firebase.auth().currentUser.uid).set({
+                    marketing: true
+                });
+            },
+            optOut: function () {
+                db.ref('users/' + firebase.auth().currentUser.uid).set({
+                    marketing: false
+                });
+            }
         }
     };
 </script>
