@@ -28,7 +28,7 @@
                 <div class="col">
                     <b-card title="Token Sale" sub-title="Steps to contribution" class="shadow-sm">
                         <p class="card-text text-center">
-                            <countdown></countdown>
+                            <countdown :timestamp="crowdsaleData.openingTime" v-if="crowdsaleData"></countdown>
                         </p>
                         <p class="card-text">
                             Once you have passed our <em>KYC</em> process you can contribute and purchase INX tokens.

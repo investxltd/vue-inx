@@ -26,6 +26,7 @@
 
     export default {
         name: 'countdown',
+        props: ['timestamp'],
         data () {
             return {
                 now: Math.trunc((new Date()).getTime() / 1000),
@@ -34,7 +35,9 @@
             };
         },
         created () {
-            this.date = Math.trunc(Date.parse('01 Dec 2018 00:00:00 GMT') / 1000);
+            console.log(new Date(this.timestamp * 1000));
+
+            this.date = Math.trunc(new Date(this.timestamp * 1000) / 1000);
 
             interval = setInterval(() => {
                 this.now = Math.trunc((new Date()).getTime() / 1000);
