@@ -68,14 +68,14 @@
                 </div>
                 <div class="col">
                     <b-card title="Social" sub-title="Be part of the conversation" class="shadow-sm">
-                        <div slot="footer">
+                        <div class="card-body social-icons text-center">
                             <a href="https://t.me/investxtoken" target="_blank"><img src="../assets/images/social/telegram.png"/></a>
                             <a href="https://twitter.com/InvestxLtd" target="_blank"><img src="../assets/images/social/twitter.png"/></a>
                             <a href="https://www.facebook.com/InvestxLtd/" target="_blank"><img src="../assets/images/social/facebook.png"/></a>
-                            <a href="https://medium.com/investxltd" target="_blank"><img src="../assets/images/social/medium.png"/></a>
+                            <!--<a href="https://medium.com/investxltd" target="_blank"><img src="../assets/images/social/medium.png"/></a>-->
                             <a href="https://www.linkedin.com/company/investx/" target="_blank"><img src="../assets/images/social/linkedin.png"/></a>
                             <!--<a href="https://www.linkedin.com/company/investx/" target="_blank"><img src="../assets/images/social/reddit.png"/></a>-->
-                            <a href="https://bitcointalk.org/index.php?topic=5033458.0" target="_blank"><img src="../assets/images/social/bitcoin.png"/></a>
+                            <!--<a href="https://bitcointalk.org/index.php?topic=5033458.0" target="_blank"><img src="../assets/images/social/bitcoin.png"/></a>-->
                         </div>
                     </b-card>
                 </div>
@@ -114,5 +114,12 @@
 <style scoped lang="scss">
     .card {
         min-height: 18rem;
+    }
+
+    .social-icons {
+        img {
+            height: 75px;
+            margin: 5px;
+        }
     }
 </style>
