@@ -3,28 +3,33 @@
         <p class="card-text">
             The current rate is <strong>{{ currentRate() }}</strong> INX per ETH
         </p>
-        <b-form inline novalidate>
-            <b-input
-                    class="mb-2 mr-sm-2 mb-sm-0"
-                    v-model="form.eth"
-                    name="eth"
-                    placeholder="ETH"
-                    type="number"
-                    @change.native="doCalc">
-            </b-input>
-
-            <img src="../assets/images/social/telegram.png" @click="doCalc"/>
-
-            <b-input
-                    class="mb-2 mr-sm-2 ml-sm-2 mb-sm-0"
-                    v-model="form.inx"
-                    id="inx"
-                    name="inx"
-                    placeholder="INX"
-                    type="number"
-                    @change.native="doReverseCalc">
-            </b-input>
-
+        <b-form novalidate>
+            <div class="row">
+                <div class="col-sm-5">
+                    <b-input
+                            class="mb-2 mb-sm-0"
+                            v-model="form.eth"
+                            name="eth"
+                            placeholder="ETH"
+                            type="number"
+                            @change.native="doCalc">
+                    </b-input>
+                </div>
+                <div class="col-sm-2 text-center">
+                    <img src="../assets/images/arrow_across.png" @click="doCalc"/>
+                </div>
+                <div class="col-sm-5">
+                    <b-input
+                            class="mb-2 mr-sm-2 mb-sm-0"
+                            v-model="form.inx"
+                            id="inx"
+                            name="inx"
+                            placeholder="INX"
+                            type="number"
+                            @change.native="doReverseCalc">
+                    </b-input>
+                </div>
+            </div>
         </b-form>
     </b-card>
 </template>
@@ -66,4 +71,8 @@
 
 <style scoped lang="scss">
     @import '../assets/scss/inx-colours.scss';
+
+    img {
+        height: 30px;
+    }
 </style>
