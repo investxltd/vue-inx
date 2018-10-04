@@ -14,6 +14,7 @@
                             type="number"
                             @change.native="doCalc">
                     </b-input>
+                    <span class="float-right pr-1"><strong>1 ETH</strong></span>
                 </div>
                 <div class="col-sm-2 text-center">
                     <img src="../assets/images/arrow_across.png" @click="doCalc"/>
@@ -28,6 +29,7 @@
                             type="number"
                             @change.native="doReverseCalc">
                     </b-input>
+                    <span class="float-right pr-1"><strong>{{ currentRate() }} INX</strong></span>
                 </div>
             </div>
         </b-form>
