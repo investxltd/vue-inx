@@ -1,5 +1,5 @@
 <template>
-    <b-card title="Personal Information" sub-title="" class="shadow-sm">
+    <b-card title="Personal Information" sub-title="" class="shadow-sm" v-if="userData">
         <b-alert :show="dismissCountDown"
                  dismissible
                  variant="success"
@@ -13,26 +13,26 @@
                           label="Email address:"
                           label-for="email"
                           description="We will never share your email with anyone else.">
+                <div class="valid-feedback d-block" v-if="userData.emailVerified">Email verified</div>
+                <div class="invalid-feedback d-block" v-if="!userData.emailVerified">Email not verified</div>
                 <b-form-input id="email"
                               type="email"
-                              v-model="form.email"
+                              v-model="userData.email"
                               required
                               placeholder="Enter email"
                               :disabled="true"
                               :state="true">
                 </b-form-input>
-                <div class="valid-feedback d-block" v-if="form.emailVerified">Email verified</div>
-                <div class="invalid-feedback d-block" v-if="!form.emailVerified">Email not verified</div>
             </b-form-group>
             <b-form-group id="name-group"
                           label="Name:"
                           label-for="name">
                 <b-form-input id="name"
                               type="text"
-                              v-model="form.name"
+                              v-model="userData.displayName"
                               required
                               placeholder="Enter name"
-                              :state="!!errors.name">
+                              :state="!!userData.displayName">
                 </b-form-input>
             </b-form-group>
             <b-form-group id="ethAccount-group"
@@ -41,11 +41,10 @@
                           description="This is often called your public key">
                 <b-form-input id="ethAccount"
                               type="text"
-                              v-model="form.ethAccount"
+                              v-model="userData.ethAccount"
                               required
                               placeholder="Enter ETH wallet"
-                              :state="!!errors.ethAccount"
-                              :disabled="errors.ethAccount">
+                              :state="isEthAccountValid()">
                 </b-form-input>
             </b-form-group>
             <b-button type="submit" variant="primary">Submit</b-button>
@@ -57,42 +56,40 @@
 <script>
     import firebase from 'firebase';
     import Web3Utils from 'web3-utils';
+    import { db } from '../main';
+    import { mapState } from 'vuex';
 
     export default {
         name: 'personal-information',
         data () {
-            const user = firebase.auth().currentUser;
             return {
-                form: {
-                    email: user.email,
-                    name: user.displayName,
-                    ethAccount: user.photoURL,
-                    emailVerified: user.emailVerified
-                },
-                errors: {
-                    email: !!user.email,
-                    name: !!user.displayName,
-                    ethAccount: !!user.photoURL && Web3Utils.isAddress(user.photoURL)
-                },
                 dismissSecs: 3,
                 dismissCountDown: 0
             };
+        },
+        computed: {
+            ...mapState([
+                'userData'
+            ])
         },
         methods: {
             onSubmit (evt) {
                 evt.preventDefault();
 
-                this.errors.name = !!this.form.name;
-                this.errors.ethAccount = !!this.form.ethAccount && Web3Utils.isAddress(this.form.ethAccount);
+                // this.errors.name = !!this.form.name;
+                // this.errors.ethAccount = !!this.form.ethAccount && Web3Utils.isAddress(this.form.ethAccount);
 
                 firebase.auth().currentUser
                     .updateProfile({
-                        displayName: this.form.name,
-                        photoURL: this.form.ethAccount
+                        displayName: this.userData.displayName,
                     })
                     .then((/*user*/) => {
+                        return db.ref(`users/${firebase.auth().currentUser.uid}/ethAccount`).set(this.userData.ethAccount);
+                    })
+                    .then(() => {
                         console.log('updated personal information');
                         this.dismissCountDown = this.dismissSecs;
+                        this.$store.dispatch('load-user-data', firebase.auth().currentUser.uid);
                     })
                     .catch((err) => console.error('Oops. ' + err.message));
 
@@ -102,6 +99,9 @@
             },
             showAlert () {
                 this.dismissCountDown = this.dismissSecs;
+            },
+            isEthAccountValid () {
+                return this.userData.ethAccount && Web3Utils.isAddress(this.userData.ethAccount)
             }
         }
     };

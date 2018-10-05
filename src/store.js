@@ -61,7 +61,7 @@ export default new Vuex.Store({
             state.db = {...db};
         },
         ['commit-user-data'] (state, userData) {
-            state.userData = userData
+            state.userData = userData;
         }
     },
     actions: {
@@ -117,7 +117,12 @@ export default new Vuex.Store({
             // FIXME can we call this multiple times - handle listeners?
             const userDb = db.ref(`users/${uid}`);
             userDb.on('value',
-                (snapshot) => commit('commit-user-data', snapshot.val()),
+                (snapshot) => {
+                    commit('commit-user-data', {
+                        ...snapshot.val(),
+                        ...firebase.auth().currentUser
+                    });
+                },
                 (errorObject) => console.error('The read failed: ' + errorObject.code)
             );
         }

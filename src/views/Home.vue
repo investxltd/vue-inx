@@ -127,14 +127,10 @@
         },
         methods: {
             optIn: function () {
-                db.ref('users/' + firebase.auth().currentUser.uid).set({
-                    marketing: true
-                });
+                db.ref(`users/${firebase.auth().currentUser.uid}/marketing`).set(true);
             },
             optOut: function () {
-                db.ref('users/' + firebase.auth().currentUser.uid).set({
-                    marketing: false
-                });
+                db.ref(`users/${firebase.auth().currentUser.uid}/marketing`).set(false);
             }
         }
     };
