@@ -1,7 +1,5 @@
 <template>
     <b-card title="KYC progress" sub-title="" class="shadow-sm" v-if="userData">
-
-
         <div class="card-body text-center">
             <div class="circle-wrap">
                 <div class="circle" v-bind:class="{ 'complete': initiated() }">
@@ -35,10 +33,12 @@
             </div>
         </div>
 
-        <b-alert variant="warning" v-if="!userData.ethAccount">
-            Please update you Ethereum address so we can start the KYC process.
-            <router-link to="/settings" class="alert-link">Account Settings</router-link>
-        </b-alert>
+        <div v-if="!isEthAccountValid()">
+            <b-alert variant="warning" show>
+                Please provide a valid Ethereum address so we can start the KYC process.
+                <router-link to="/settings" class="alert-link">Account Settings</router-link>
+            </b-alert>
+        </div>
 
         <div v-else>
             <div v-if="!userData.kycStatus">
@@ -82,8 +82,10 @@
             <div v-else-if="userData.kycStatus === 'Low'">
                 Sorry, but Coinfirm have evaluated the risks associated to the details provided and we cannot continue with your application. We wish you all the best on your crypto adventures.
             </div>
-        </div>
 
+            <hr/>
+            <a href="#" v-on:click="tempCycle">TEMP next...</a>
+        </div>
     </b-card>
 </template>
 
@@ -102,6 +104,7 @@
     import firebase from 'firebase';
     import { mapState } from 'vuex';
     import { db } from '../main';
+    import Web3Utils from 'web3-utils';
 
     export default {
         name: 'kyc-progress',
@@ -109,6 +112,11 @@
             ...mapState([
                 'userData'
             ])
+        },
+        data () {
+            return {
+                tempCycleIndex: -1
+            };
         },
         methods: {
             initiate () {
@@ -131,6 +139,20 @@
             },
             complete () {
                 return ['High'].includes(this.userData.kycStatus);
+            },
+            isEthAccountValid () {
+                if (!this.userData.ethAccount) {
+                    return false;
+                }
+                return Web3Utils.isAddress(this.userData.ethAccount);
+            },
+            tempCycle () {
+                const states = ['Unconfirmed', 'Received', 'Under Review', 'Incomplete', 'High', 'Low'];
+                this.tempCycleIndex++;
+                if (this.tempCycleIndex >= states.length) {
+                    this.tempCycleIndex = 0;
+                }
+                db.ref(`users/${firebase.auth().currentUser.uid}/kycStatus`).set(states[this.tempCycleIndex]);
             }
         }
     };

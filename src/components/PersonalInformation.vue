@@ -76,9 +76,6 @@
             onSubmit (evt) {
                 evt.preventDefault();
 
-                // this.errors.name = !!this.form.name;
-                // this.errors.ethAccount = !!this.form.ethAccount && Web3Utils.isAddress(this.form.ethAccount);
-
                 firebase.auth().currentUser
                     .updateProfile({
                         displayName: this.userData.displayName,
@@ -101,7 +98,10 @@
                 this.dismissCountDown = this.dismissSecs;
             },
             isEthAccountValid () {
-                return this.userData.ethAccount && Web3Utils.isAddress(this.userData.ethAccount)
+                if (!this.userData.ethAccount) {
+                    return false;
+                }
+                return Web3Utils.isAddress(this.userData.ethAccount);
             }
         }
     };

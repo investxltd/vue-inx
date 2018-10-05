@@ -38,10 +38,12 @@
                             All participants in the ICO <span class="text-bold">must</span> be verified by our KYC provider.
                         </p>
 
-                        <b-alert show variant="warning" v-if="!this.currentUser.photoURL">
-                            Please update you Ethereum address so we can start the KYC process.
-                            <router-link to="/settings" class="alert-link">Account Settings</router-link>
-                        </b-alert>
+                        <div v-if="!isEthAccountValid()">
+                            <b-alert variant="warning" show>
+                                Please provide a valid Ethereum address so we can start the KYC process.
+                                <router-link to="/settings" class="alert-link">Account Settings</router-link>
+                            </b-alert>
+                        </div>
 
                         <div slot="footer">
                             <a href="#" class="card-link">Jump to KYC</a>
@@ -106,6 +108,7 @@
     import { mapState, mapGetters } from 'vuex';
     import Countdown from '@/components/Countdown';
     import { db } from '../main';
+    import Web3Utils from 'web3-utils';
 
     export default {
         name: 'home',
@@ -131,7 +134,13 @@
             },
             optOut: function () {
                 db.ref(`users/${firebase.auth().currentUser.uid}/marketing`).set(false);
-            }
+            },
+            isEthAccountValid () {
+                if (!this.userData.ethAccount) {
+                    return false;
+                }
+                return Web3Utils.isAddress(this.userData.ethAccount);
+            },
         }
     };
 </script>
