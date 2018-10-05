@@ -35,9 +35,8 @@
             };
         },
         created () {
-            console.log(new Date(this.timestamp * 1000));
-
-            this.date = Math.trunc(new Date(this.timestamp * 1000) / 1000);
+            // timestamp should be in epoch format (without millis)
+            this.date = this.timestamp;
 
             interval = setInterval(() => {
                 this.now = Math.trunc((new Date()).getTime() / 1000);
