@@ -46,6 +46,7 @@
 
 <script>
     import firebase from 'firebase';
+    import { db } from '../main';
 
     export default {
         name: 'login',
@@ -69,7 +70,16 @@
                 const provider = new firebase.auth.GoogleAuthProvider();
                 firebase.auth().signInWithPopup(provider)
                     .then((user) => {
-                        this.$store.dispatch('load-user-data', user.user.uid);
+
+                        // set default marketing preference, this is done on sign-up for non-google users
+                        if (user.additionalUserInfo.isNewUser) {
+                            return db.ref(`users/${firebase.auth().currentUser.uid}/marketing`).set(false)
+                        }
+
+                        return user;
+                    })
+                    .then((/*user*/) => {
+                        this.$store.dispatch('load-user-data', firebase.auth().currentUser.uid);
                         return this.$router.replace('home')
                     })
                     .catch((err) => console.error('Oops. ' + err.message));
