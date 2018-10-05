@@ -41,6 +41,7 @@
 
 <script>
     import firebase from 'firebase';
+    import { db } from '../main';
 
     export default {
         name: 'signUp',
@@ -62,6 +63,7 @@
                         }),
                         credential.user.sendEmailVerification()])
                     )
+                    .then(() => db.ref(`users/${firebase.auth().currentUser.uid}/marketing`).set(false))
                     .then(() => {
                         this.$store.dispatch('load-user-data', firebase.auth().currentUser.uid);
                         this.$router.replace('home')
