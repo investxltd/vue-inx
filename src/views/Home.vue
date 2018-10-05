@@ -2,9 +2,9 @@
     <div class="wrapper">
         <sidebar></sidebar>
 
-        <div id="content">
+        <div id="content" v-if="userData">
             <h1>Home</h1>
-            <h3>Welcome {{ this.currentUser.displayName }} to the Investx portal</h3>
+            <h3>Welcome {{ this.userData.displayName }} to the Investx portal</h3>
 
             <hr/>
 
