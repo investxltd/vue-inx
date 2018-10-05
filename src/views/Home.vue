@@ -10,22 +10,6 @@
 
             <div class="row">
                 <div class="col">
-                    <b-card title="Up Next" sub-title="Completing KYC and AML" class="shadow-sm">
-                        <p class="card-text">
-                            All participants in the ICO <span class="text-bold">must</span> be verified by our KYC provider.
-                        </p>
-
-                        <b-alert show variant="warning" v-if="!this.currentUser.photoURL">
-                            Please update you Ethereum address so we can start the KYC process.
-                            <router-link to="/settings" class="alert-link">Account Settings</router-link>
-                        </b-alert>
-
-                        <div slot="footer">
-                            <a href="#" class="card-link">Jump to KYC</a>
-                        </div>
-                    </b-card>
-                </div>
-                <div class="col">
                     <b-card title="Token Sale" sub-title="Steps to contribution" class="shadow-sm">
                         <p class="card-text text-center">
                             <countdown :timestamp="1539594078" v-if="crowdsaleData"></countdown>
@@ -45,6 +29,22 @@
                         <div slot="footer">
                             <router-link to="/token-sale" class="card-link">Token Sale</router-link>
                             <router-link to="/token-sale" class="card-link">Read more</router-link>
+                        </div>
+                    </b-card>
+                </div>
+                <div class="col">
+                    <b-card title="Up Next" sub-title="Completing KYC and AML" class="shadow-sm">
+                        <p class="card-text">
+                            All participants in the ICO <span class="text-bold">must</span> be verified by our KYC provider.
+                        </p>
+
+                        <b-alert show variant="warning" v-if="!this.currentUser.photoURL">
+                            Please update you Ethereum address so we can start the KYC process.
+                            <router-link to="/settings" class="alert-link">Account Settings</router-link>
+                        </b-alert>
+
+                        <div slot="footer">
+                            <a href="#" class="card-link">Jump to KYC</a>
                         </div>
                     </b-card>
                 </div>

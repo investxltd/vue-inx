@@ -18,7 +18,7 @@
                             Due to current legislation all ICO investors, will need to pass KYC verification to get future access to the platform.
                         </p>
                         <p class="card-text">
-                            That is why we have decided to collaborate with Confirm for this process so it will be fast and secure!
+                            That is why we have decided to collaborate with Coinfirm for this process so it will be fast and secure!
                         </p>
                         <p class="card-text">
                             Simply follow the steps after clicking on the link. It should not take more than a few minutes to complete.

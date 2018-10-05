@@ -21,8 +21,8 @@
                               :disabled="true"
                               :state="true">
                 </b-form-input>
-                <b-form-invalid-feedback :force-show="!form.emailVerified">Email not verified</b-form-invalid-feedback>
-                <b-form-valid-feedback :force-show="form.emailVerified">Email verified</b-form-valid-feedback>
+                <div class="valid-feedback d-block" v-if="form.emailVerified">Email verified</div>
+                <div class="invalid-feedback d-block" v-if="!form.emailVerified">Email not verified</div>
             </b-form-group>
             <b-form-group id="name-group"
                           label="Name:"
@@ -44,7 +44,8 @@
                               v-model="form.ethAccount"
                               required
                               placeholder="Enter ETH wallet"
-                              :state="!!errors.ethAccount">
+                              :state="!!errors.ethAccount"
+                              :disabled="errors.ethAccount">
                 </b-form-input>
             </b-form-group>
             <b-button type="submit" variant="primary">Submit</b-button>
@@ -55,6 +56,7 @@
 
 <script>
     import firebase from 'firebase';
+    import Web3Utils from 'web3-utils';
 
     export default {
         name: 'personal-information',
@@ -70,7 +72,7 @@
                 errors: {
                     email: !!user.email,
                     name: !!user.displayName,
-                    ethAccount: !!user.photoURL
+                    ethAccount: !!user.photoURL && Web3Utils.isAddress(user.photoURL)
                 },
                 dismissSecs: 3,
                 dismissCountDown: 0
@@ -81,7 +83,7 @@
                 evt.preventDefault();
 
                 this.errors.name = !!this.form.name;
-                this.errors.ethAccount = !!this.form.ethAccount;
+                this.errors.ethAccount = !!this.form.ethAccount && Web3Utils.isAddress(this.form.ethAccount);
 
                 firebase.auth().currentUser
                     .updateProfile({
