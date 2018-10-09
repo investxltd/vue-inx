@@ -43,13 +43,6 @@
             ])
         },
         methods: {
-            forgot: function (evt) {
-                evt.preventDefault();
-
-                firebase.auth().sendPasswordResetEmail(this.email)
-                    .then((/*user*/) => this.message = 'Reset password email sent')
-                    .catch((err) => console.error('Oops. ' + err.message));
-            },
             optIn: function () {
                 db.ref(`users/${firebase.auth().currentUser.uid}/marketing`).set(true);
             },

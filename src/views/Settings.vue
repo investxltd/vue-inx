@@ -19,23 +19,7 @@
 
             <div class="row mt-5">
                 <div class="col">
-                    <b-card title="Reset Password" sub-title="" class="shadow-sm">
-                        <div v-if="!message">
-                            <b-form @submit="forgot" novalidate>
-                                <div class="form-group">
-                                    <label for="inputEmail">Email address</label>
-                                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="email" required :disabled="true" :state="true">
-                                </div>
-
-                                <b-button type="submit" variant="primary">Send reset password email</b-button>
-                            </b-form>
-                        </div>
-                        <div v-else>
-                            <b-alert show variant="warning">
-                                {{ message }}
-                            </b-alert>
-                        </div>
-                    </b-card>
+                    <forgot-password></forgot-password>
                 </div>
                 <div class="col">
                     <em>&nbsp;</em>
@@ -50,13 +34,14 @@
     import Sidebar from '@/components/Sidebar';
     import PersonalInformation from '@/components/PersonalInformation';
     import MarketingPreference from '@/components/MarketingPreference';
+    import ForgotPassword from '@/components/ForgotPassword';
     import firebase from 'firebase';
     import { db } from '../main';
     import { mapState } from 'vuex';
 
     export default {
         name: 'settings',
-        components: {Sidebar, PersonalInformation, MarketingPreference},
+        components: {Sidebar, PersonalInformation, MarketingPreference, ForgotPassword},
         data () {
             const user = firebase.auth().currentUser;
             return {
@@ -69,21 +54,7 @@
                 'userData'
             ])
         },
-        methods: {
-            forgot: function (evt) {
-                evt.preventDefault();
-
-                firebase.auth().sendPasswordResetEmail(this.email)
-                    .then((/*user*/) => this.message = 'Reset password email sent')
-                    .catch((err) => console.error('Oops. ' + err.message));
-            },
-            optIn: function () {
-                db.ref(`users/${firebase.auth().currentUser.uid}/marketing`).set(true);
-            },
-            optOut: function () {
-                db.ref(`users/${firebase.auth().currentUser.uid}/marketing`).set(false);
-            },
-        }
+        methods: {}
     };
 </script>
 
