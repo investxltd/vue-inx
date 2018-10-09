@@ -36,7 +36,7 @@
         },
         created () {
             // timestamp should be in epoch format (without millis)
-            this.date = this.timestamp;
+            this.date = parseInt(this.timestamp);
 
             interval = setInterval(() => {
                 this.now = Math.trunc((new Date()).getTime() / 1000);

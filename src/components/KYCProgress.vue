@@ -1,6 +1,6 @@
 <template>
-    <b-card title="KYC progress" sub-title="" class="shadow-sm" v-if="userData">
-        <div class="card-body text-center">
+    <div v-if="userData">
+        <div class="text-center">
             <div class="circle-wrap">
                 <div class="circle" v-bind:class="{ 'complete': initiated() }">
                     <span v-if="initiated()">&#10003;</span>
@@ -33,60 +33,34 @@
             </div>
         </div>
 
-        <div v-if="!isEthAccountValid()">
-            <b-alert variant="warning" show>
-                Please provide a valid Ethereum address so we can start the KYC process.
-                <router-link to="/settings" class="alert-link">Account Settings</router-link>
-            </b-alert>
+        <div v-if="userData.kycStatus === 'Unconfirmed'">
+            Thank you for starting KYC process. Coinfirm has received your details and are awaiting for you to submit your process your KYC application
+            information
         </div>
 
-        <div v-else>
-            <div v-if="!userData.kycStatus">
-                <p class="card-text">
-                    Your details will be passed to Coinfirm to capture and process your KYC application
-                </p>
-
-                <p class="card-text">
-                    We will start KYC with:
-                    <br>Email <code>{{ userData.email }}</code>
-                    <br/>ETH wallet <code>{{ userData.ethAccount }}</code>
-                    <!--<br/>User ID <code>{{ userData.uid }}</code>-->
-                </p>
-
-                <b-button-group class="mx-1 mt-3">
-                    <b-button variant="primary" v-on:click="initiate">Initiate KYC</b-button>
-                </b-button-group>
-            </div>
-
-            <div v-else-if="userData.kycStatus === 'Unconfirmed'">
-                Thank you for starting KYC process. Coinfirm has received your details and are awaiting for you to submit your process your KYC application
-                information
-            </div>
-
-            <div v-else-if="userData.kycStatus === 'Received'">
-                Coinfirm has received your information provided for KYC and these are currently under review. Thank you for you patience.
-            </div>
-
-            <div v-else-if="userData.kycStatus === 'Under Review'">
-                Coinfirm has received your information provided for KYC and these are currently under review. Thank you for you patience.
-            </div>
-
-            <div v-else-if="userData.kycStatus === 'Incomplete'">
-                The details that you have provided have been analysed and have been identified as being incomplete. Coinfirm has requested further information to enable the process to complete.
-            </div>
-
-            <div v-else-if="userData.kycStatus === 'High'">
-                KYC Completed! Thank you, we have whitelisted your account.
-            </div>
-
-            <div v-else-if="userData.kycStatus === 'Low'">
-                Sorry, but Coinfirm have evaluated the risks associated to the details provided and we cannot continue with your application. We wish you all the best on your crypto adventures.
-            </div>
-
-            <hr/>
-            <a href="#" v-on:click="tempCycle">TEMP next...</a>
+        <div v-else-if="userData.kycStatus === 'Received'">
+            Coinfirm has received your information provided for KYC and these are currently under review. Thank you for you patience.
         </div>
-    </b-card>
+
+        <div v-else-if="userData.kycStatus === 'Under Review'">
+            Coinfirm has received your information provided for KYC and these are currently under review. Thank you for you patience.
+        </div>
+
+        <div v-else-if="userData.kycStatus === 'Incomplete'">
+            The details that you have provided have been analysed and have been identified as being incomplete. Coinfirm has requested further information to enable the process to complete.
+        </div>
+
+        <div v-else-if="userData.kycStatus === 'High'">
+            KYC Completed! Thank you, we have whitelisted your account.
+        </div>
+
+        <div v-else-if="userData.kycStatus === 'Low'">
+            Sorry, but Coinfirm have evaluated the risks associated to the details provided and we cannot continue with your application. We wish you all the best on your crypto adventures.
+        </div>
+
+        <a href="#" v-on:click="tempCycle">next...</a>
+
+    </div>
 </template>
 
 
@@ -119,9 +93,6 @@
             };
         },
         methods: {
-            initiate () {
-                db.ref(`users/${firebase.auth().currentUser.uid}/kycStatus`).set('Unconfirmed');
-            },
             initiated () {
                 return ['Unconfirmed', 'Received', 'Under Review', 'Incomplete', 'High', 'Low'].includes(this.userData.kycStatus);
             },
@@ -164,7 +135,7 @@
     .circle-wrap {
         display: inline-flex;
         font-size: 0.75rem;
-        margin: 10px;
+        margin: 20px;
         text-align: center;
         flex-direction: column;
     }

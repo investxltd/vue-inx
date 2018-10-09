@@ -24,3 +24,8 @@ npm run lint
 ```
 npm run test:unit
 ```
+
+
+### TODO
+
+https://firebase.google.com/docs/auth/custom-email-handler

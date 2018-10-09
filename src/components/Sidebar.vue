@@ -6,7 +6,6 @@
 
         <router-link to="/home">Home</router-link>
         <router-link to="/token-sale">Token Sale</router-link>
-        <router-link to="/kyc">KYC</router-link>
         <!--<router-link to="/transactions">Transactions</router-link>-->
         <router-link to="/settings">Account Settings</router-link>
 
