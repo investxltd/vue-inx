@@ -5,13 +5,13 @@ import Eth from 'ethjs';
 import ethjsUnit from 'ethjs-unit';
 
 import firebase from 'firebase';
-
 import { db } from './main';
+
+import _ from 'lodash';
 
 Vue.use(Vuex);
 
 const tokenAbi = require('./assets/abi/tokenAbi');
-
 const crowdsaleAbi = require('./assets/abi/crowdsaleAbi');
 
 const bnToString = (bn) => bn[0].toString(10);
@@ -145,11 +145,8 @@ export default new Vuex.Store({
                 const coinbase = await eth.coinbase();
 
                 const valInWei = ethjsUnit.toWei(valInEth, 'ether');
-                console.log(valInEth);
-                console.log(valInWei.toString(10));
 
                 const tx = await contract.buyTokens(coinbase, {value: valInWei, from: coinbase})
-                console.log(tx);
             } else {
 
             }
