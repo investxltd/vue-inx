@@ -1,6 +1,11 @@
 <template>
     <b-card title="Contribute to the Token Sale" sub-title="Send the investment through your whitelisted ETH wallet" class="shadow-sm">
 
+        <b-alert variant="danger" :show="!hasWeb3()">
+            No web3!
+            <br/>You should try MetaMask or an Ethereum browser to contribute
+        </b-alert>
+
         <b-form @submit="onSubmit" novalidate class="">
 
             <b-form-group id="range-amount-group"
@@ -12,7 +17,7 @@
                 <h4 class="float-right">{{ form.amount }} ETH</h4>
             </b-form-group>
 
-            <b-button type="submit" variant="primary">Contribute</b-button>
+            <b-button type="submit" variant="primary" :disabled="!hasWeb3()">Contribute</b-button>
         </b-form>
 
         <div class="or mt-3 mb-3 text-center">- OR -</div>
@@ -47,6 +52,10 @@
         methods: {
             onSubmit (evt) {
                 evt.preventDefault();
+                this.$store.dispatch('contribute', this.form.amount);
+            },
+            hasWeb3 () {
+                return (typeof web3 !== 'undefined');
             }
         },
         computed: {

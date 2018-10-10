@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import Eth from 'ethjs';
+import ethjsUnit from 'ethjs-unit';
 
 import firebase from 'firebase';
 
@@ -72,6 +73,12 @@ export default new Vuex.Store({
             if (firebase.auth().currentUser) {
                 dispatch('load-user-data', firebase.auth().currentUser.uid);
             }
+
+            // Every 5 seconds check if the main account has changed
+            setInterval(() => {
+                dispatch('load-token-smart-contract');
+                dispatch('load-crowdsale-smart-contract');
+            }, 5000);
         },
         async ['load-token-smart-contract'] ({commit, dispatch, state, rootState}) {
 
@@ -125,7 +132,28 @@ export default new Vuex.Store({
                 },
                 (errorObject) => console.error('The read failed: ' + errorObject.code)
             );
-        }
+        },
+        async ['contribute'] ({commit, dispatch, state, rootState}, valInEth) {
+
+            // FIXME this will work for now
+            if (typeof web3 !== 'undefined') {
+                // Use Mist/MetaMask's provider
+                window.web3 = new Web3(web3.currentProvider);
+                const eth = new Eth(window.web3.currentProvider);
+                const contract = eth.contract(crowdsaleAbi).at(state.db.crowdsaleAddress);
+
+                const coinbase = await eth.coinbase();
+
+                const valInWei = ethjsUnit.toWei(valInEth, 'ether');
+                console.log(valInEth);
+                console.log(valInWei.toString(10));
+
+                const tx = await contract.buyTokens(coinbase, {value: valInWei, from: coinbase})
+                console.log(tx);
+            } else {
+
+            }
+        },
     },
     getters: {
         currentRate: (state) => () => {
