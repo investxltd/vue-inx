@@ -88,11 +88,12 @@ export default new Vuex.Store({
             dispatch('load-account-balance');
             dispatch('load-account-kyc');
 
+            if (firebase.auth().currentUser) {
+                dispatch('load-user-data', firebase.auth().currentUser.uid);
+            }
+
             // Every 5 seconds check if the main account has changed
             setInterval(() => {
-                if (firebase.auth().currentUser) {
-                    dispatch('load-user-data', firebase.auth().currentUser.uid);
-                }
                 dispatch('load-token-smart-contract');
                 dispatch('load-crowdsale-smart-contract');
                 dispatch('load-account-balance');
