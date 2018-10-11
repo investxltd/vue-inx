@@ -51,7 +51,9 @@ export default new Vuex.Store({
             tokenAddress: null
         },
         network: 'ropsten',
-        userData: null
+        userData: null,
+        accountBalance: null,
+        accountKyc: null
     },
     mutations: {
         ['commit-token-smart-contract'] (state, tokenData) {
@@ -67,29 +69,30 @@ export default new Vuex.Store({
             state.userData = userData;
         },
         ['commit-account-balance'] (state, accountBalance) {
-            console.log(accountBalance);
-            state.userData = {
-                ...state.userData,
-                balance: accountBalance
-            };
+            state.accountBalance = accountBalance;
+        },
+        ['commit-account-kyc'] (state, accountKyc) {
+            state.accountKyc = accountKyc;
         }
     },
     actions: {
         async ['bootstrap'] ({commit, dispatch, state, rootState}) {
-            await dispatch('load-db');
+            await dispatch('load-db'); // include one time load of userData
+
             dispatch('load-token-smart-contract');
             dispatch('load-crowdsale-smart-contract');
-
-            if (firebase.auth().currentUser) {
-                dispatch('load-user-data', firebase.auth().currentUser.uid);
-                dispatch('load-account-balance');
-            }
+            dispatch('load-account-balance');
+            dispatch('load-account-kyc');
 
             // Every 5 seconds check if the main account has changed
             setInterval(() => {
+                if (firebase.auth().currentUser) {
+                    dispatch('load-user-data', firebase.auth().currentUser.uid);
+                }
                 dispatch('load-token-smart-contract');
                 dispatch('load-crowdsale-smart-contract');
                 dispatch('load-account-balance');
+                dispatch('load-account-kyc');
             }, 5000);
         },
         async ['load-token-smart-contract'] ({commit, dispatch, state, rootState}) {
@@ -127,9 +130,8 @@ export default new Vuex.Store({
             });
         },
         async ['load-account-balance'] ({commit, dispatch, state, rootState}) {
-            if (window.web3 && state.userData) {
-                // Use MetaMask's (or similar) provider
-                const eth = new Eth(window.web3.currentProvider);
+            if (state.userData) {
+                const eth = new Eth(new Eth.HttpProvider(`https://${state.network}.infura.io`));
                 const contract = eth.contract(tokenAbi).at(state.db.tokenAddress);
 
                 // use the registered eth address
@@ -137,11 +139,33 @@ export default new Vuex.Store({
                 commit('commit-account-balance', bnToEther(myBalance));
             }
         },
+        async ['load-account-kyc'] ({commit, dispatch, state, rootState}) {
+            if (state.userData) {
+                const eth = new Eth(new Eth.HttpProvider(`https://${state.network}.infura.io`));
+                const contract = eth.contract(crowdsaleAbi).at(state.db.crowdsaleAddress);
+
+                // use the registered eth address
+                const myKyc = await contract.kyc(state.userData.ethAccount);
+                commit('commit-account-kyc', myKyc[0]);
+            }
+        },
         async ['load-db'] ({commit, dispatch, state, rootState}) {
             await db.ref(`network/${state.network}`).once('value',
                 (snapshot) => commit('commit-db', snapshot.val()),
                 (errorObject) => console.error('The read failed: ' + errorObject.code)
             );
+
+            if (firebase.auth().currentUser) {
+                await db.ref(`users/${firebase.auth().currentUser.uid}`).once('value',
+                    (snapshot) => {
+                        commit('commit-user-data', {
+                            ...snapshot.val(),
+                            ...firebase.auth().currentUser
+                        });
+                    },
+                    (errorObject) => console.error('The read failed: ' + errorObject.code)
+                );
+            }
         },
         async ['load-user-data'] ({commit, dispatch, state, rootState}, uid) {
             // FIXME can we call this multiple times - handle listeners?
@@ -160,7 +184,7 @@ export default new Vuex.Store({
                 // Use MetaMask's (or similar) provider
                 const eth = new Eth(window.web3.currentProvider);
                 const contract = eth.contract(crowdsaleAbi).at(state.db.crowdsaleAddress);
-                
+
                 const valInWei = ethjsUnit.toWei(valInEth, 'ether');
 
                 const tx = await contract.buyTokens(

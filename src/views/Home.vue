@@ -10,7 +10,7 @@
 
             <div class="row">
                 <div class="col">
-                    <b-card title="Up Next" sub-title="Completing KYC and AML" class="shadow-sm">
+                    <b-card title="Up Next" sub-title="Completing KYC and AML" class="shadow-sm" v-if="userData && !accountKyc">
                         <div v-if="!isEthAccountValid()">
                             <p class="card-text">
                                 Due to current legislation all ICO investors, will need to pass KYC verification to get future access to the platform.
@@ -46,10 +46,19 @@
                                 <b-button variant="primary" v-on:click="initiate">Initiate KYC</b-button>
                             </b-button-group>
                         </div>
-                        <div v-else>
+                        <div v-else-if="userData.kycStatus && !userData.kyc">
                             <kyc-progress></kyc-progress>
                         </div>
                     </b-card>
+
+                    <div class="row" v-else-if="userData && accountKyc">
+                        <div class="col">
+                            <contribute></contribute>
+                        </div>
+                        <div class="col">
+                            <calc></calc>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -62,8 +71,8 @@
                         <p class="card-text" v-if="tokenData.totalSupply">
                             Total supply of INX is <strong>{{ tokenData.totalSupply }}</strong>.
                         </p>
-                        <p class="card-text" v-if="userData.balance">
-                            Your balance in INX is <strong>{{ userData.balance }}</strong>.
+                        <p class="card-text" v-if="accountBalance">
+                            Your balance in INX is <strong>{{ accountBalance }}</strong>.
                         </p>
                         <p class="card-text" v-if="crowdsaleData.isCrowdsaleOpen">
                             The current rate of INX tokens per ETH is <strong>{{ currentRate() }}</strong>.
@@ -102,6 +111,8 @@
     import Sidebar from '@/components/Sidebar';
     import KycProgress from '@/components/KYCProgress';
     import Countdown from '@/components/Countdown';
+    import Contribute from '@/components/Contribute';
+    import Calc from '@/components/Calc';
     import firebase from 'firebase';
     import { mapState, mapGetters } from 'vuex';
     import { db } from '../main';
@@ -109,7 +120,7 @@
 
     export default {
         name: 'home',
-        components: {Countdown, Sidebar, KycProgress},
+        components: {Countdown, Sidebar, KycProgress, Contribute, Calc},
         data () {
             return {
                 currentUser: firebase.auth().currentUser
@@ -119,7 +130,9 @@
             ...mapState([
                 'tokenData',
                 'crowdsaleData',
-                'userData'
+                'userData',
+                'accountBalance',
+                'accountKyc'
             ]),
             ...mapGetters([
                 'currentRate'
