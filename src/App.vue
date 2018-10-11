@@ -12,10 +12,35 @@
 <script>
     import {mapState} from 'vuex';
 
+    /* global web3, Web3 */
+
     export default {
         name: 'app',
-        mounted () {
+        async mounted () {
             this.$store.dispatch('bootstrap');
+
+            // Modern dapp browsers...
+            if (window.ethereum) {
+                console.log(`Using post-Nov 2nd (approval) MetaMask`);
+                window.web3 = new Web3(ethereum);
+                try {
+                    // Request account access if needed
+                    await window.ethereum.enable();
+                    console.log(`Enabled`)
+                } catch (error) {
+                    // User denied account access...
+                    console.log(error);
+                }
+            }
+            // Legacy dapp browsers...
+            else if (window.web3) {
+                console.log(`Using pre-Nov 2nd MetaMask`);
+                window.web3 = new Web3(web3.currentProvider);
+            }
+            // Non-dapp browsers...
+            else {
+                console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+            }
         },
         computed: {
             ...mapState([

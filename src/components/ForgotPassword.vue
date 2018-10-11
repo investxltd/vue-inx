@@ -24,6 +24,13 @@
 
     export default {
         name: 'forgot-password',
+        data () {
+            const user = firebase.auth().currentUser;
+            return {
+                email: user.email,
+                message: ''
+            };
+        },
         computed: {},
         methods: {
             forgot: function (evt) {

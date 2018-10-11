@@ -42,13 +42,6 @@
     export default {
         name: 'settings',
         components: {Sidebar, PersonalInformation, MarketingPreference, ForgotPassword},
-        data () {
-            const user = firebase.auth().currentUser;
-            return {
-                email: user.email,
-                message: ''
-            };
-        },
         computed: {
             ...mapState([
                 'userData'

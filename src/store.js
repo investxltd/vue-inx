@@ -17,6 +17,8 @@ const crowdsaleAbi = require('./assets/abi/crowdsaleAbi');
 const bnToString = (bn) => bn[0].toString(10);
 const bnToEther = (bn) => Eth.fromWei(bn[0], 'ether');
 
+/* global web3, Web3 */
+
 export default new Vuex.Store({
     state: {
         tokenData: {
@@ -63,6 +65,13 @@ export default new Vuex.Store({
         },
         ['commit-user-data'] (state, userData) {
             state.userData = userData;
+        },
+        ['commit-account-balance'] (state, accountBalance) {
+            console.log(accountBalance);
+            state.userData = {
+                ...state.userData,
+                balance: accountBalance
+            };
         }
     },
     actions: {
@@ -70,14 +79,17 @@ export default new Vuex.Store({
             await dispatch('load-db');
             dispatch('load-token-smart-contract');
             dispatch('load-crowdsale-smart-contract');
+
             if (firebase.auth().currentUser) {
                 dispatch('load-user-data', firebase.auth().currentUser.uid);
+                dispatch('load-account-balance');
             }
 
             // Every 5 seconds check if the main account has changed
             setInterval(() => {
                 dispatch('load-token-smart-contract');
                 dispatch('load-crowdsale-smart-contract');
+                dispatch('load-account-balance');
             }, 5000);
         },
         async ['load-token-smart-contract'] ({commit, dispatch, state, rootState}) {
@@ -114,6 +126,17 @@ export default new Vuex.Store({
                 paused: (await contract.paused())[0]
             });
         },
+        async ['load-account-balance'] ({commit, dispatch, state, rootState}) {
+            if (window.web3 && state.userData) {
+                // Use MetaMask's (or similar) provider
+                const eth = new Eth(window.web3.currentProvider);
+                const contract = eth.contract(tokenAbi).at(state.db.tokenAddress);
+
+                // use the registered eth address
+                const myBalance = await contract.balanceOf(state.userData.ethAccount);
+                commit('commit-account-balance', bnToEther(myBalance));
+            }
+        },
         async ['load-db'] ({commit, dispatch, state, rootState}) {
             await db.ref(`network/${state.network}`).once('value',
                 (snapshot) => commit('commit-db', snapshot.val()),
@@ -122,8 +145,7 @@ export default new Vuex.Store({
         },
         async ['load-user-data'] ({commit, dispatch, state, rootState}, uid) {
             // FIXME can we call this multiple times - handle listeners?
-            const userDb = db.ref(`users/${uid}`);
-            userDb.on('value',
+            db.ref(`users/${uid}`).on('value',
                 (snapshot) => {
                     commit('commit-user-data', {
                         ...snapshot.val(),
@@ -134,21 +156,17 @@ export default new Vuex.Store({
             );
         },
         async ['contribute'] ({commit, dispatch, state, rootState}, valInEth) {
-
-            // FIXME this will work for now
-            if (typeof web3 !== 'undefined') {
-                // Use Mist/MetaMask's provider
-                window.web3 = new Web3(web3.currentProvider);
+            if (window.web3 && state.userData) {
+                // Use MetaMask's (or similar) provider
                 const eth = new Eth(window.web3.currentProvider);
                 const contract = eth.contract(crowdsaleAbi).at(state.db.crowdsaleAddress);
-
-                const coinbase = await eth.coinbase();
-
+                
                 const valInWei = ethjsUnit.toWei(valInEth, 'ether');
 
-                const tx = await contract.buyTokens(coinbase, {value: valInWei, from: coinbase})
-            } else {
-
+                const tx = await contract.buyTokens(
+                    state.userData.ethAccount,
+                    {value: valInWei, from: state.userData.ethAccount}
+                );
             }
         },
     },

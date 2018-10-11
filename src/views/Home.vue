@@ -55,9 +55,15 @@
 
             <div class="row mt-5">
                 <div class="col">
-                    <b-card title="Token Sale" sub-title="Steps to contribution" class="shadow-sm">
+                    <b-card title="Token Sale" sub-title="Steps to contribution" class="shadow-sm" v-if="crowdsaleData && tokenData && userData">
                         <p class="card-text text-center" v-if="isOpeningTimeInTheFuture()">
-                            <countdown :timestamp="crowdsaleData.openingTime" v-if="crowdsaleData"></countdown>
+                            <countdown :timestamp="crowdsaleData.openingTime" ></countdown>
+                        </p>
+                        <p class="card-text" v-if="tokenData.totalSupply">
+                            Total supply of INX is <strong>{{ tokenData.totalSupply }}</strong>.
+                        </p>
+                        <p class="card-text" v-if="userData.balance">
+                            Your balance in INX is <strong>{{ userData.balance }}</strong>.
                         </p>
                         <p class="card-text" v-if="crowdsaleData.isCrowdsaleOpen">
                             The current rate of INX tokens per ETH is <strong>{{ currentRate() }}</strong>.
