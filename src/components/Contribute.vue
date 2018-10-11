@@ -1,9 +1,13 @@
 <template>
     <b-card title="Contribute to the Token Sale" sub-title="Send the investment through your whitelisted ETH wallet" class="shadow-sm">
 
-        <b-alert variant="danger" :show="!hasWeb3()">
+        <b-alert variant="danger" :show="!hasWeb3()" dismissible fade>
             No web3!
             <br/>You should try MetaMask or an Ethereum browser to contribute
+        </b-alert>
+
+        <b-alert :variant="contributeInfo && contributeInfo.state" :show="!!contributeInfo" dismissible fade>
+            {{ contributeInfo && contributeInfo.message }}
         </b-alert>
 
         <b-form @submit="onSubmit" novalidate class="">
@@ -60,7 +64,8 @@
         },
         computed: {
             ...mapState([
-                'db'
+                'db',
+                'contributeInfo'
             ])
         }
     };

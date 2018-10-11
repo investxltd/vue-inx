@@ -53,7 +53,8 @@ export default new Vuex.Store({
         network: 'ropsten',
         userData: null,
         accountBalance: null,
-        accountKyc: null
+        accountKyc: null,
+        contributeInfo: null
     },
     mutations: {
         ['commit-token-smart-contract'] (state, tokenData) {
@@ -73,6 +74,9 @@ export default new Vuex.Store({
         },
         ['commit-account-kyc'] (state, accountKyc) {
             state.accountKyc = accountKyc;
+        },
+        ['commit-contribute-message'] (state, contributeInfo) {
+            state.contributeInfo = contributeInfo;
         }
     },
     actions: {
@@ -191,6 +195,29 @@ export default new Vuex.Store({
                     state.userData.ethAccount,
                     {value: valInWei, from: state.userData.ethAccount}
                 );
+
+                commit('commit-contribute-message', {
+                    message: 'You transaction has been submitted',
+                    tx: tx,
+                    state: 'info'
+                });
+
+                const txPoller = setInterval(async function () {
+                    let receipt = await eth.getTransactionReceipt(tx);
+
+                    if (receipt) {
+                        console.log(receipt);
+                        commit('commit-contribute-message', {
+                            message: 'You transaction has been confirmed',
+                            tx: tx,
+                            receipt: receipt,
+                            state: 'success'
+                        });
+
+                        clearInterval(txPoller);
+                        setTimeout(() => commit('commit-contribute-message', null), 30000);
+                    }
+                }, 500);
             }
         },
     },

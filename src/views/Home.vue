@@ -69,19 +69,19 @@
                             <countdown :timestamp="crowdsaleData.openingTime" ></countdown>
                         </p>
                         <p class="card-text" v-if="tokenData.totalSupply">
-                            Total supply of INX is <strong>{{ tokenData.totalSupply }}</strong>.
+                            Total supply <strong>{{ tokenData.totalSupply | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true}) }}</strong>.
                         </p>
                         <p class="card-text" v-if="accountBalance">
-                            Your balance in INX is <strong>{{ accountBalance }}</strong>.
+                            Your balance is <strong>{{ accountBalance | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>.
                         </p>
                         <p class="card-text" v-if="crowdsaleData.isCrowdsaleOpen">
-                            The current rate of INX tokens per ETH is <strong>{{ currentRate() }}</strong>.
+                            The current rate of <strong>INX</strong> tokens per <strong>ETH</strong> is <strong>{{ currentRate() }}</strong>.
                         </p>
                         <p class="card-text" v-else>
                             <em>The Investx token sale is not currently open.</em>
                         </p>
                         <p class="card-text">
-                            Total raised in ETH so far is <strong>{{ crowdsaleData.raisedInEther }}</strong>
+                            Total raised in <strong>ETH</strong> so far is <strong>{{ crowdsaleData.raisedInEther | currency('ETH', 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>
                         </p>
                         <div slot="footer">
                             <router-link to="/token-sale" class="card-link">Token Sale</router-link>
