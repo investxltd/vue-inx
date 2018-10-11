@@ -14,15 +14,8 @@
                 </div>
                 <div class="col">
                     <marketing-preference></marketing-preference>
-                </div>
-            </div>
 
-            <div class="row mt-5">
-                <div class="col">
-                    <forgot-password></forgot-password>
-                </div>
-                <div class="col">
-                    <em>&nbsp;</em>
+                    <forgot-password class="mt-5"></forgot-password>
                 </div>
             </div>
         </div>

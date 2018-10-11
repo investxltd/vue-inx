@@ -14,12 +14,8 @@
                 </div>
                 <div class="col">
                     <calc></calc>
-                </div>
-            </div>
 
-            <div class="row mt-5">
-                <div class="col">
-                    <b-card title="Token Sale" sub-title="Information about the Token Sale" class="shadow-sm">
+                    <b-card title="Token Sale" sub-title="Information about the Token Sale" class="shadow-sm mt-5">
 
                         <table class="table table-striped" v-if="tokenData && crowdsaleData">
                             <tbody>
@@ -66,9 +62,6 @@
                             </tbody>
                         </table>
                     </b-card>
-                </div>
-                <div class="col">
-
                 </div>
             </div>
         </div>

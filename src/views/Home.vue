@@ -57,50 +57,29 @@
                         </div>
                         <div class="col">
                             <calc></calc>
+
+                            <b-card title="Token Sale" sub-title="Steps to contribution" class="shadow-sm mt-5" v-if="crowdsaleData && tokenData && userData">
+                                <p class="card-text text-center" v-if="isOpeningTimeInTheFuture()">
+                                    <countdown :timestamp="crowdsaleData.openingTime" ></countdown>
+                                </p>
+                                <p class="card-text" v-if="tokenData.totalSupply">
+                                    Total supply <strong>{{ tokenData.totalSupply | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true}) }}</strong>.
+                                </p>
+                                <p class="card-text" v-if="accountBalance">
+                                    Your balance is <strong>{{ accountBalance | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>.
+                                </p>
+                                <p class="card-text" v-if="crowdsaleData.isCrowdsaleOpen">
+                                    The current rate of <strong>INX</strong> tokens per <strong>ETH</strong> is <strong>{{ currentRate() }}</strong>.
+                                </p>
+                                <p class="card-text" v-else>
+                                    <em>The Investx token sale is not currently open.</em>
+                                </p>
+                                <p class="card-text">
+                                    Total raised in <strong>ETH</strong> so far is <strong>{{ crowdsaleData.raisedInEther | currency('ETH', 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>
+                                </p>
+                            </b-card>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="row mt-5">
-                <div class="col">
-                    <b-card title="Token Sale" sub-title="Steps to contribution" class="shadow-sm" v-if="crowdsaleData && tokenData && userData">
-                        <p class="card-text text-center" v-if="isOpeningTimeInTheFuture()">
-                            <countdown :timestamp="crowdsaleData.openingTime" ></countdown>
-                        </p>
-                        <p class="card-text" v-if="tokenData.totalSupply">
-                            Total supply <strong>{{ tokenData.totalSupply | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true}) }}</strong>.
-                        </p>
-                        <p class="card-text" v-if="accountBalance">
-                            Your balance is <strong>{{ accountBalance | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>.
-                        </p>
-                        <p class="card-text" v-if="crowdsaleData.isCrowdsaleOpen">
-                            The current rate of <strong>INX</strong> tokens per <strong>ETH</strong> is <strong>{{ currentRate() }}</strong>.
-                        </p>
-                        <p class="card-text" v-else>
-                            <em>The Investx token sale is not currently open.</em>
-                        </p>
-                        <p class="card-text">
-                            Total raised in <strong>ETH</strong> so far is <strong>{{ crowdsaleData.raisedInEther | currency('ETH', 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>
-                        </p>
-                        <div slot="footer">
-                            <router-link to="/token-sale" class="card-link">Token Sale</router-link>
-                            <router-link to="/token-sale" class="card-link">Read more</router-link>
-                        </div>
-                    </b-card>
-                </div>
-                <div class="col">
-                    <b-card title="Social" sub-title="Be part of the conversation" class="shadow-sm">
-                        <div class="card-body social-icons text-center">
-                            <a href="https://t.me/investxtoken" target="_blank"><img src="../assets/images/social/telegram.png"/></a>
-                            <a href="https://twitter.com/InvestxLtd" target="_blank"><img src="../assets/images/social/twitter.png"/></a>
-                            <a href="https://www.facebook.com/InvestxLtd/" target="_blank"><img src="../assets/images/social/facebook.png"/></a>
-                            <!--<a href="https://medium.com/investxltd" target="_blank"><img src="../assets/images/social/medium.png"/></a>-->
-                            <a href="https://www.linkedin.com/company/investx/" target="_blank"><img src="../assets/images/social/linkedin.png"/></a>
-                            <!--<a href="https://www.linkedin.com/company/investx/" target="_blank"><img src="../assets/images/social/reddit.png"/></a>-->
-                            <!--<a href="https://bitcointalk.org/index.php?topic=5033458.0" target="_blank"><img src="../assets/images/social/bitcoin.png"/></a>-->
-                        </div>
-                    </b-card>
                 </div>
             </div>
         </div>

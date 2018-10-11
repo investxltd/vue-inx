@@ -3,9 +3,13 @@
         <div id="app">
             <router-view/>
         </div>
-        <footer class="mt-5 mb-5">
-            <span class="badge badge-light float-right">{{ network }}</span>
+        <footer class="mt-5 mb-5 text-center">
+            <a href="https://t.me/investxtoken" target="_blank"><img src="./assets/images/social/telegram.png"/></a>
+            <a href="https://twitter.com/InvestxLtd" target="_blank"><img src="./assets/images/social/twitter.png"/></a>
+            <a href="https://www.facebook.com/InvestxLtd/" target="_blank"><img src="./assets/images/social/facebook.png"/></a>
+            <a href="https://www.linkedin.com/company/investx/" target="_blank"><img src="./assets/images/social/linkedin.png"/></a>
         </footer>
+        <span class="badge badge-light float-right">{{ network }}</span>
     </div>
 </template>
 
@@ -66,6 +70,13 @@
 
     code {
         color: $primary;
+    }
+
+    footer {
+        img {
+            width: 75px;
+            margin: 15px;
+        }
     }
 
     #app {
