@@ -1,5 +1,5 @@
 <template>
-    <nav id="sidebar">
+    <nav id="sidebar" class="d-none d-md-block">
         <div class="sidebar-header">
             <img alt="Investx" src="../assets/inx_logo.png" class="inx-logo">
         </div>
