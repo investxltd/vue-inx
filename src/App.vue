@@ -12,7 +12,9 @@
                 <b-navbar-nav class="ml-auto">
                     <router-link to="/home" class="nav-link">Home</router-link>
                     <router-link to="/token-sale" class="nav-link">Token Sale</router-link>
-                    <router-link to="/settings" class="nav-link">Account Settings</router-link>
+                    <router-link to="/settings" class="nav-link mr-3">Account Settings</router-link>
+
+                    <a v-on:click="logout" href="#" class="nav-link" >Logout</a>
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
@@ -33,6 +35,7 @@
 
 <script>
     import {mapState} from 'vuex';
+    import firebase from 'firebase';
 
     /* global web3, Web3 */
 
@@ -68,6 +71,14 @@
             ...mapState([
                 'network'
             ])
+        },
+        methods: {
+            logout: function () {
+                firebase.auth().signOut().then(() => {
+                    this.$store.commit('commit-user-data', null);
+                    this.$router.replace('login');
+                });
+            }
         }
     };
 </script>

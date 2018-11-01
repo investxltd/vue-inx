@@ -9,7 +9,7 @@
             <hr/>
 
             <div class="row">
-                <div class="col">
+                <div class="col-sm-6">
                     <!--<contribute></contribute>-->
                     <calc></calc>
                 </div>
