@@ -21,7 +21,7 @@
                             <p class="card-text">Before purchasing INX you must input your Ethereum wallet address where you will send your ETH from into the Account Settings page.</p>
                             <p class="card-text">The Ethereum wallet
                                 you input will be the address your INX will be sent to, so please ensure it is correct and you have access to it.</p>
-                            <p class="card-text"><strong>Do not use any exchange addresses or any other shared/third party addresses and do not input your private key.</strong></p>
+                            <p class="card-text"><strong>Do not use any exchange addresses or any other shared/third party addresses. We will never ask you for your private key</strong></p>
                             <h5>3. Contributor smart contract address allocation</h5>
                             <p class="card-text">One you have input your Ethereum address we will allocate you a unique Ethereum smart contract which will show in this dashboard.</p>
                             <p class="card-text">This address is

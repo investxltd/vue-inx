@@ -13,7 +13,7 @@
                     <!--<contribute></contribute>-->
                     <calc></calc>
                 </div>
-                <div class="col">
+                <!--<div class="col">-->
                     <!--<b-card title="Token Sale" sub-title="Information about the Token Sale" class="shadow-sm">-->
 
                         <!--<table class="table table-striped" v-if="tokenData && crowdsaleData">-->
@@ -61,7 +61,7 @@
                             <!--</tbody>-->
                         <!--</table>-->
                     <!--</b-card>-->
-                </div>
+                <!--</div>-->
             </div>
         </div>
     </div>
