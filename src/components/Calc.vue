@@ -11,6 +11,7 @@
                             v-model="form.eth"
                             name="eth"
                             placeholder="ETH"
+                            min="0"
                             type="number"
                             @change.native="doCalc">
                     </b-input>
@@ -27,6 +28,7 @@
                             name="inx"
                             placeholder="INX"
                             type="number"
+                            min="0"
                             @change.native="doReverseCalc">
                     </b-input>
                     <span class="float-right pr-1"><strong>{{ currentRate() }} INX</strong></span>
