@@ -4,7 +4,7 @@
 
         <div id="content">
             <h1>Token Sale</h1>
-            <h3>Invest in INX and help Investx growth the community</h3>
+            <h3>Invest in INX and help Investx grow the community</h3>
 
             <hr/>
 

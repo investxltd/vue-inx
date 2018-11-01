@@ -33,55 +33,86 @@
                             </p>
                         </div>
                         <!--<div v-else-if="!userData.kycStatus">-->
-                            <!--<p class="card-text">-->
-                                <!--Your details will be passed to Coinfirm to capture and process your KYC application-->
-                            <!--</p>-->
+                        <!--<p class="card-text">-->
+                        <!--Your details will be passed to Coinfirm to capture and process your KYC application-->
+                        <!--</p>-->
 
-                            <!--<p class="card-text">-->
-                                <!--We will start KYC with:-->
-                                <!--<br>Email <code>{{ userData.email }}</code>-->
-                                <!--<br/>ETH wallet <code>{{ userData.ethAccount }}</code>-->
-                                <!--&lt;!&ndash;<br/>User ID <code>{{ userData.uid }}</code>&ndash;&gt;-->
-                            <!--</p>-->
+                        <!--<p class="card-text">-->
+                        <!--We will start KYC with:-->
+                        <!--<br>Email <code>{{ userData.email }}</code>-->
+                        <!--<br/>ETH wallet <code>{{ userData.ethAccount }}</code>-->
+                        <!--&lt;!&ndash;<br/>User ID <code>{{ userData.uid }}</code>&ndash;&gt;-->
+                        <!--</p>-->
 
-                            <!--<b-button-group class="mx-1 mt-3">-->
-                                <!--<b-button variant="primary" v-on:click="initiate">Initiate KYC</b-button>-->
-                            <!--</b-button-group>-->
+                        <!--<b-button-group class="mx-1 mt-3">-->
+                        <!--<b-button variant="primary" v-on:click="initiate">Initiate KYC</b-button>-->
+                        <!--</b-button-group>-->
                         <!--</div>-->
                         <!--<div v-else-if="userData.kycStatus && !userData.kyc">-->
-                            <!--<kyc-progress></kyc-progress>-->
+                        <!--<kyc-progress></kyc-progress>-->
                         <!--</div>-->
                     </b-card>
 
                     <!--<div class="row" v-else-if="userData && accountKyc">-->
-                        <!--<div class="col">-->
-                            <!--<contribute></contribute>-->
-                        <!--</div>-->
-                        <!--<div class="col">-->
-                            <!--<calc></calc>-->
-
-                            <!--<b-card title="Token Sale" sub-title="Steps to contribution" class="shadow-sm mt-5" v-if="crowdsaleData && tokenData && userData">-->
-                                <!--<p class="card-text text-center" v-if="isOpeningTimeInTheFuture()">-->
-                                    <!--<countdown :timestamp="crowdsaleData.openingTime" ></countdown>-->
-                                <!--</p>-->
-                                <!--<p class="card-text" v-if="tokenData.totalSupply">-->
-                                    <!--Total supply <strong>{{ tokenData.totalSupply | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true}) }}</strong>.-->
-                                <!--</p>-->
-                                <!--<p class="card-text" v-if="accountBalance">-->
-                                    <!--Your balance is <strong>{{ accountBalance | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>.-->
-                                <!--</p>-->
-                                <!--<p class="card-text" v-if="crowdsaleData.isCrowdsaleOpen">-->
-                                    <!--The current rate of <strong>INX</strong> tokens per <strong>ETH</strong> is <strong>{{ currentRate() }}</strong>.-->
-                                <!--</p>-->
-                                <!--<p class="card-text" v-else>-->
-                                    <!--<em>The Investx token sale is not currently open.</em>-->
-                                <!--</p>-->
-                                <!--<p class="card-text">-->
-                                    <!--Total raised in <strong>ETH</strong> so far is <strong>{{ crowdsaleData.raisedInEther | currency('ETH', 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>-->
-                                <!--</p>-->
-                            <!--</b-card>-->
-                        <!--</div>-->
+                    <!--<div class="col">-->
+                    <!--<contribute></contribute>-->
                     <!--</div>-->
+                    <!--<div class="col">-->
+                    <!--<calc></calc>-->
+
+                    <!--<b-card title="Token Sale" sub-title="Steps to contribution" class="shadow-sm mt-5" v-if="crowdsaleData && tokenData && userData">-->
+                    <!--<p class="card-text text-center" v-if="isOpeningTimeInTheFuture()">-->
+                    <!--<countdown :timestamp="crowdsaleData.openingTime" ></countdown>-->
+                    <!--</p>-->
+                    <!--<p class="card-text" v-if="tokenData.totalSupply">-->
+                    <!--Total supply <strong>{{ tokenData.totalSupply | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true}) }}</strong>.-->
+                    <!--</p>-->
+                    <!--<p class="card-text" v-if="accountBalance">-->
+                    <!--Your balance is <strong>{{ accountBalance | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>.-->
+                    <!--</p>-->
+                    <!--<p class="card-text" v-if="crowdsaleData.isCrowdsaleOpen">-->
+                    <!--The current rate of <strong>INX</strong> tokens per <strong>ETH</strong> is <strong>{{ currentRate() }}</strong>.-->
+                    <!--</p>-->
+                    <!--<p class="card-text" v-else>-->
+                    <!--<em>The Investx token sale is not currently open.</em>-->
+                    <!--</p>-->
+                    <!--<p class="card-text">-->
+                    <!--Total raised in <strong>ETH</strong> so far is <strong>{{ crowdsaleData.raisedInEther | currency('ETH', 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>-->
+                    <!--</p>-->
+                    <!--</b-card>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="col">
+                    <b-card title="Investx INX token" sub-title="Purchase process" class="shadow-sm">
+                        <div>
+                            <h5>1. Email verification</h5>
+                            <p class="card-text">You email must be verified – when you registered we sent you a verification link by email. Please click on the link to verify the email address which
+                                you input is yours.</p>
+                            <p class="card-text">You can check whether your email address has been verified in the Account Settings page linked on the left.</p>
+                            <h5>2. Ethereum wallet</h5>
+                            <p class="card-text">Before purchasing INX you must input your Ethereum wallet address where you will send your ETH from into the Account Settings page. The Ethereum wallet
+                                you input will be the address your INX will be sent to, so please ensure it is correct and you have access to it.</p>
+                            <p class="card-text">Do not use any exchange addresses or any other shared/third party addresses and do not input your private key.</p>
+                            <h5>3. Contributor smart contract address allocation</h5>
+                            <p class="card-text">One you have input your Ethereum address we will allocate you a unique Ethereum smart contract which will show in your dashboard. This address is
+                                created just for you and acts as a secure escrow account created so we can ensure ETH is assigned to individuals alongside their KYC checks in accordance with UK
+                                AML
+                                regulations.</p>
+                            <p class="card-text">ETH can only be transferred out to the Investx crowdsale contract or refunded back to your nominated Ethereum address (in the event the soft cap is
+                                not
+                                reached).</p>
+                            <h5>4. KYC</h5>
+                            <p class="card-text">Investx will perform standard KYC checks before releasing INX tokens to contributors, via a major third party KYC processor.</p>
+                            <p class="card-text">These checks will include standard AML, sanctions, PEP and source of wealth checks (for larger contributions) and will be processed in batches
+                                on or
+                                before the soft cap is reached. If you have any reason to believe you will fail KYC checks you should not invest.</p>
+                            <h5>5. Token distribution</h5>
+                            <p class="card-text">Once you have passed KYC the ETH will automatically transfer to the Investx crowdsale contract and the correct amount of INX will be minted
+                                into your
+                                Ethereum wallet address. Token transfers will be enabled at the end of the ICO.</p>
+                        </div>
+                    </b-card>
                 </div>
             </div>
         </div>
