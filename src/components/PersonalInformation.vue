@@ -44,6 +44,7 @@
                               v-model="userData.ethAccount"
                               required
                               placeholder="Enter ETH wallet"
+                              :disabled="isEthAccountValid()"
                               :state="isEthAccountValid()">
                 </b-form-input>
             </b-form-group>
@@ -81,7 +82,12 @@
                         displayName: this.userData.displayName,
                     })
                     .then((/*user*/) => {
-                        return db.ref(`users/${firebase.auth().currentUser.uid}/ethAccount`).set(this.userData.ethAccount);
+                        if (this.isEthAccountValid()) {
+                            return db.ref(`users/${firebase.auth().currentUser.uid}/ethAccount`).set(this.userData.ethAccount);
+                        }
+                        else {
+                            return true;
+                        }
                     })
                     .then(() => {
                         this.dismissCountDown = this.dismissSecs;
