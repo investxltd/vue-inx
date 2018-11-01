@@ -1,5 +1,23 @@
 <template>
     <div>
+        <b-navbar toggleable="md" variant="light">
+
+            <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+
+            <b-navbar-brand href="https://portal.investx.io">
+                <img alt="Investx" src="./assets/inx_logo.png" class="inx-logo">
+            </b-navbar-brand>
+
+            <b-collapse is-nav id="nav_collapse">
+                <b-navbar-nav class="ml-auto">
+                    <router-link to="/home" class="nav-link">Home</router-link>
+                    <router-link to="/token-sale" class="nav-link">Token Sale</router-link>
+                    <router-link to="/settings" class="nav-link">Account Settings</router-link>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+
+        <!-- navbar-1.vue -->
         <div id="app">
             <router-view/>
         </div>

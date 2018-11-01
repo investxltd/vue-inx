@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <sidebar></sidebar>
+        <!--<sidebar></sidebar>-->
 
         <div id="content" v-if="userData">
             <h1>Home</h1>

@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <sidebar></sidebar>
+        <!--<sidebar></sidebar>-->
 
         <div id="content">
             <h1>Token Sale</h1>

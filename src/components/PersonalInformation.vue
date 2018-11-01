@@ -48,6 +48,7 @@
                               :state="isEthAccountValid()">
                 </b-form-input>
             </b-form-group>
+            <p class="small">I confirm I am not a citizen, national, resident (tax or otherwise) of the USA, South Korea or China and I agree to the <a href="https://investx.io/ico-terms-and-conditions" target="_blank">Investx T&Cs</a></p>
             <b-button type="submit" variant="primary">Submit</b-button>
         </b-form>
     </b-card>
