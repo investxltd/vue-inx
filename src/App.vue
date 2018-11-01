@@ -9,7 +9,7 @@
             <a href="https://www.facebook.com/InvestxLtd/" target="_blank"><img src="./assets/images/social/facebook.png"/></a>
             <a href="https://www.linkedin.com/company/investx/" target="_blank"><img src="./assets/images/social/linkedin.png"/></a>
         </footer>
-        <span class="badge badge-light float-right">{{ network }}</span>
+        <!--<span class="badge badge-light float-right">{{ network }}</span>-->
     </div>
 </template>
 
