@@ -102,4 +102,11 @@
     .card-subtitle {
         margin-bottom: 1.5rem !important;
     }
+
+    @media screen and (max-width: 767px) {
+        #content {
+            width: 100%;
+            margin: 10px 10px 10px 10px;
+        }
+    }
 </style>
