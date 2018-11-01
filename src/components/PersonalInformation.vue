@@ -84,7 +84,6 @@
                         return db.ref(`users/${firebase.auth().currentUser.uid}/ethAccount`).set(this.userData.ethAccount);
                     })
                     .then(() => {
-                        console.log('updated personal information');
                         this.dismissCountDown = this.dismissSecs;
                         this.$store.dispatch('load-user-data', firebase.auth().currentUser.uid);
                     })
