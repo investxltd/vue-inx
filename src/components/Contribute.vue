@@ -33,6 +33,10 @@
         <div class="text-center contract-address">
             <code>{{ db.crowdsaleAddress }}</code>
         </div>
+
+        <p class="card-text mt-3">
+            <strong>Note:</strong> this ETH address is assigned only to you, a separate address is created for each investor to ensure 100% compliance with UK AML regulations. Once KYC is completed INX will be minted to your ETH address.
+        </p>
     </b-card>
 </template>
 

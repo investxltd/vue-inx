@@ -10,76 +10,78 @@
 
             <div class="row">
                 <div class="col">
-                    <b-card title="Up Next" sub-title="Completing KYC and AML" class="shadow-sm" v-if="userData && !accountKyc">
-                        <div v-if="!isEthAccountValid()">
+                    <b-card title="Up Next" sub-title="Completing KYC and AML" class="shadow-sm">
+                        <div>
                             <p class="card-text">
-                                Due to current legislation all ICO investors, will need to pass KYC verification to get future access to the platform.
-                            </p>
-                            <p class="card-text">
-                                That is why we have decided to collaborate with Coinfirm for this process so it will be fast and secure!
-                            </p>
-                            <p class="card-text">
-                                Simply follow the steps after clicking on the link. It should not take more than a few minutes to complete.
-                            </p>
-                            <p class="card-text">
-                                All investors, including <strong>pre-sale</strong> contributors, must pass it before they can access the platform.
+                                Investx will perform standard KYC checks before releasing INX tokens to contributors.
                             </p>
 
-                            <b-alert variant="warning" show>
-                                Please provide a valid Ethereum address so we can start the KYC process.
+                            <p class="card-text">
+                                These checks will include AML, sanctions, PEP and source of wealth checks (for larger contributions) and will be processed on or before the soft cap is reached.
+                            </p>
+
+                            <b-alert variant="warning" show v-if="!isEthAccountValid()">
+                                Please provide a valid Ethereum address and we will allocate your personalised contribution smart contract
                                 <router-link to="/settings" class="alert-link">Account Settings</router-link>
                             </b-alert>
-                        </div>
-                        <div v-else-if="!userData.kycStatus">
-                            <p class="card-text">
-                                Your details will be passed to Coinfirm to capture and process your KYC application
-                            </p>
 
-                            <p class="card-text">
-                                We will start KYC with:
-                                <br>Email <code>{{ userData.email }}</code>
-                                <br/>ETH wallet <code>{{ userData.ethAccount }}</code>
-                                <!--<br/>User ID <code>{{ userData.uid }}</code>-->
+                            <p class="card-text text-right">
+                                <em>For help and support visit our <a href="https://t.me/investxtoken" target="_blank">Telegram</a> channel</em>
+                                <a href="https://t.me/investxtoken" target="_blank" class="ml-3">
+                                    <img src="../assets/images/social/telegram.png" style="max-height: 50px"/>
+                                </a>
                             </p>
+                        </div>
+                        <!--<div v-else-if="!userData.kycStatus">-->
+                            <!--<p class="card-text">-->
+                                <!--Your details will be passed to Coinfirm to capture and process your KYC application-->
+                            <!--</p>-->
 
-                            <b-button-group class="mx-1 mt-3">
-                                <b-button variant="primary" v-on:click="initiate">Initiate KYC</b-button>
-                            </b-button-group>
-                        </div>
-                        <div v-else-if="userData.kycStatus && !userData.kyc">
-                            <kyc-progress></kyc-progress>
-                        </div>
+                            <!--<p class="card-text">-->
+                                <!--We will start KYC with:-->
+                                <!--<br>Email <code>{{ userData.email }}</code>-->
+                                <!--<br/>ETH wallet <code>{{ userData.ethAccount }}</code>-->
+                                <!--&lt;!&ndash;<br/>User ID <code>{{ userData.uid }}</code>&ndash;&gt;-->
+                            <!--</p>-->
+
+                            <!--<b-button-group class="mx-1 mt-3">-->
+                                <!--<b-button variant="primary" v-on:click="initiate">Initiate KYC</b-button>-->
+                            <!--</b-button-group>-->
+                        <!--</div>-->
+                        <!--<div v-else-if="userData.kycStatus && !userData.kyc">-->
+                            <!--<kyc-progress></kyc-progress>-->
+                        <!--</div>-->
                     </b-card>
 
-                    <div class="row" v-else-if="userData && accountKyc">
-                        <div class="col">
-                            <contribute></contribute>
-                        </div>
-                        <div class="col">
-                            <calc></calc>
+                    <!--<div class="row" v-else-if="userData && accountKyc">-->
+                        <!--<div class="col">-->
+                            <!--<contribute></contribute>-->
+                        <!--</div>-->
+                        <!--<div class="col">-->
+                            <!--<calc></calc>-->
 
-                            <b-card title="Token Sale" sub-title="Steps to contribution" class="shadow-sm mt-5" v-if="crowdsaleData && tokenData && userData">
-                                <p class="card-text text-center" v-if="isOpeningTimeInTheFuture()">
-                                    <countdown :timestamp="crowdsaleData.openingTime" ></countdown>
-                                </p>
-                                <p class="card-text" v-if="tokenData.totalSupply">
-                                    Total supply <strong>{{ tokenData.totalSupply | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true}) }}</strong>.
-                                </p>
-                                <p class="card-text" v-if="accountBalance">
-                                    Your balance is <strong>{{ accountBalance | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>.
-                                </p>
-                                <p class="card-text" v-if="crowdsaleData.isCrowdsaleOpen">
-                                    The current rate of <strong>INX</strong> tokens per <strong>ETH</strong> is <strong>{{ currentRate() }}</strong>.
-                                </p>
-                                <p class="card-text" v-else>
-                                    <em>The Investx token sale is not currently open.</em>
-                                </p>
-                                <p class="card-text">
-                                    Total raised in <strong>ETH</strong> so far is <strong>{{ crowdsaleData.raisedInEther | currency('ETH', 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>
-                                </p>
-                            </b-card>
-                        </div>
-                    </div>
+                            <!--<b-card title="Token Sale" sub-title="Steps to contribution" class="shadow-sm mt-5" v-if="crowdsaleData && tokenData && userData">-->
+                                <!--<p class="card-text text-center" v-if="isOpeningTimeInTheFuture()">-->
+                                    <!--<countdown :timestamp="crowdsaleData.openingTime" ></countdown>-->
+                                <!--</p>-->
+                                <!--<p class="card-text" v-if="tokenData.totalSupply">-->
+                                    <!--Total supply <strong>{{ tokenData.totalSupply | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true}) }}</strong>.-->
+                                <!--</p>-->
+                                <!--<p class="card-text" v-if="accountBalance">-->
+                                    <!--Your balance is <strong>{{ accountBalance | currency('INX', 0, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>.-->
+                                <!--</p>-->
+                                <!--<p class="card-text" v-if="crowdsaleData.isCrowdsaleOpen">-->
+                                    <!--The current rate of <strong>INX</strong> tokens per <strong>ETH</strong> is <strong>{{ currentRate() }}</strong>.-->
+                                <!--</p>-->
+                                <!--<p class="card-text" v-else>-->
+                                    <!--<em>The Investx token sale is not currently open.</em>-->
+                                <!--</p>-->
+                                <!--<p class="card-text">-->
+                                    <!--Total raised in <strong>ETH</strong> so far is <strong>{{ crowdsaleData.raisedInEther | currency('ETH', 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}</strong>-->
+                                <!--</p>-->
+                            <!--</b-card>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 <template>
-    <b-card title="INX Calculator" sub-title="Use the calculator to compute an estimation of the INX you will receive" class="shadow-sm">
+    <b-card title="INX Calculator" sub-title="Use the calculator to see the quantity of INX you will receive" class="shadow-sm">
         <p class="card-text">
             The current rate is <strong>{{ currentRate() }}</strong> INX per ETH
         </p>

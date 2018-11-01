@@ -38,7 +38,7 @@
             <b-form-group id="ethAccount-group"
                           label="ETH wallet:"
                           label-for="ethAccount"
-                          description="This is often called your public key">
+                          description="This is often called your public key. Please ensure you input your correct ETH wallet because INX tokens will be sent to this address only.">
                 <b-form-input id="ethAccount"
                               type="text"
                               v-model="userData.ethAccount"

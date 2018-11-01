@@ -4,18 +4,17 @@
 
         <div id="content">
             <h1>Token Sale</h1>
-            <h3>Invest in INX and get lifetime access to our platform</h3>
+            <h3>Invest in INX and help Investx growth the community</h3>
 
             <hr/>
 
             <div class="row">
                 <div class="col">
-                    <contribute></contribute>
+                    <!--<contribute></contribute>-->
+                    <calc></calc>
                 </div>
                 <div class="col">
-                    <calc></calc>
-
-                    <b-card title="Token Sale" sub-title="Information about the Token Sale" class="shadow-sm mt-5">
+                    <b-card title="Token Sale" sub-title="Information about the Token Sale" class="shadow-sm">
 
                         <table class="table table-striped" v-if="tokenData && crowdsaleData">
                             <tbody>
