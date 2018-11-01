@@ -108,5 +108,12 @@
             width: 100%;
             margin: 10px 10px 10px 10px;
         }
+
+        footer {
+            img {
+                width: 50px;
+                margin: 10px;
+            }
+        }
     }
 </style>
