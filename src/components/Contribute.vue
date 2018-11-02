@@ -36,7 +36,7 @@
         </div>
 
         <p class="card-text mt-3">
-            <strong>Note:</strong> this ETH address is assigned only to you, a separate address is created for each investor to ensure 100% compliance with UK AML regulations. Once KYC is completed INX will be minted to your ETH address.
+            <strong>Note:</strong> this secure ETH address is assigned only to you, a new address is created for each investor to ensure 100% compliance with UK AML regulations. Once KYC is completed INX will be minted to your own ETH address.
         </p>
     </b-card>
 </template>
