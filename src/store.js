@@ -68,9 +68,10 @@ export default new Vuex.Store({
         },
         ['commit-user-data'] (state, userData) {
             state.userData = userData;
-            
+
             db.ref(`users/${userData.uid}/email`).set(userData.email);
             db.ref(`users/${userData.uid}/emailVerified`).set(userData.emailVerified);
+            db.ref(`users/${userData.uid}/displayName`).set(userData.displayName);
         },
         ['commit-account-balance'] (state, accountBalance) {
             state.accountBalance = accountBalance;
@@ -176,7 +177,6 @@ export default new Vuex.Store({
             }
         },
         async ['load-user-data'] ({commit, dispatch, state, rootState}, uid) {
-            // FIXME can we call this multiple times - handle listeners?
             db.ref(`users/${uid}`).on('value',
                 (snapshot) => {
                     commit('commit-user-data', {
