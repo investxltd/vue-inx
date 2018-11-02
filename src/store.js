@@ -68,6 +68,9 @@ export default new Vuex.Store({
         },
         ['commit-user-data'] (state, userData) {
             state.userData = userData;
+            
+            db.ref(`users/${userData.uid}/email`).set(userData.email);
+            db.ref(`users/${userData.uid}/emailVerified`).set(userData.emailVerified);
         },
         ['commit-account-balance'] (state, accountBalance) {
             state.accountBalance = accountBalance;
@@ -94,10 +97,10 @@ export default new Vuex.Store({
 
             // Every 5 seconds check if the main account has changed
             // setInterval(() => {
-            //     dispatch('load-token-smart-contract');
-            //     dispatch('load-crowdsale-smart-contract');
-            //     dispatch('load-account-balance');
-            //     dispatch('load-account-kyc');
+                // dispatch('load-token-smart-contract');
+                // dispatch('load-crowdsale-smart-contract');
+                // dispatch('load-account-balance');
+                // dispatch('load-account-kyc');
             // }, 5000);
         },
         async ['load-token-smart-contract'] ({commit, dispatch, state, rootState}) {

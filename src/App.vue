@@ -4,7 +4,7 @@
 
             <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-            <b-navbar-brand href="https://portal.investx.io">
+            <b-navbar-brand href="https://www.investx.io" target="_blank">
                 <img alt="Investx" src="./assets/inx_logo.png" class="inx-logo">
             </b-navbar-brand>
 
