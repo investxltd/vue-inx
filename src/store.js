@@ -45,12 +45,10 @@ export default new Vuex.Store({
             paused: null
         },
         db: {
-            crowdsaleAbi: null,
             crowdsaleAddress: null,
-            tokenAbi: null,
             tokenAddress: null
         },
-        network: 'ropsten',
+        network: 'mainnet',
         userData: null,
         accountBalance: null,
         accountKyc: null,
@@ -87,8 +85,8 @@ export default new Vuex.Store({
         async ['bootstrap'] ({commit, dispatch, state, rootState}) {
             await dispatch('load-db'); // include one time load of userData
 
-            // dispatch('load-token-smart-contract');
-            // dispatch('load-crowdsale-smart-contract');
+            dispatch('load-token-smart-contract');
+            dispatch('load-crowdsale-smart-contract');
             // dispatch('load-account-balance');
             // dispatch('load-account-kyc');
 
@@ -96,13 +94,13 @@ export default new Vuex.Store({
                 dispatch('load-user-data', firebase.auth().currentUser.uid);
             }
 
-            // Every 5 seconds check if the main account has changed
-            // setInterval(() => {
-                // dispatch('load-token-smart-contract');
-                // dispatch('load-crowdsale-smart-contract');
+            // Every x seconds check if the main account has changed
+            setInterval(() => {
+                dispatch('load-token-smart-contract');
+                dispatch('load-crowdsale-smart-contract');
                 // dispatch('load-account-balance');
                 // dispatch('load-account-kyc');
-            // }, 5000);
+            }, 30000);
         },
         async ['load-token-smart-contract'] ({commit, dispatch, state, rootState}) {
 
