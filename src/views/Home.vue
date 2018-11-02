@@ -12,6 +12,11 @@
                 <div class="col">
                     <b-card title="Investx INX token" sub-title="Purchase process" class="shadow-sm">
                         <div>
+                            <b-alert variant="warning" show v-if="!isEthAccountValid()" class="mb-2">
+                                Please provide a valid Ethereum address and we will allocate your personalised contribution smart contract
+                                <router-link to="/settings" class="alert-link">Account Settings</router-link>
+                            </b-alert>
+
                             <h5>1. Email verification</h5>
                             <p class="card-text">You email must be verified – when you registered we sent you a verification link by email.</p>
                             <p class="card-text">Please click on the link to verify the email address which
@@ -40,11 +45,6 @@
                             <p class="card-text">Once you have passed KYC the committed ETH will transfer to the Investx crowdsale contract and the correct amount of INX will be minted
                                 into your
                                 Ethereum wallet address. Token transfers will be enabled at the end of the ICO.</p>
-
-                            <b-alert variant="warning" show v-if="!isEthAccountValid()" class="mt-5">
-                                Please provide a valid Ethereum address and we will allocate your personalised contribution smart contract
-                                <router-link to="/settings" class="alert-link">Account Settings</router-link>
-                            </b-alert>
 
                             <p class="card-text text-right">
                                 <em>For help and support visit our <a href="https://t.me/investxtoken" target="_blank">Telegram</a> channel</em>
