@@ -21,8 +21,7 @@
                 <h4 class="float-right">{{ form.amount }} ETH</h4>
             </b-form-group>
 
-            <!--<b-button type="submit" variant="primary" :disabled="!hasWeb3()">Contribute</b-button>-->
-            <b-button type="submit" variant="primary" :disabled="true">Contribute</b-button>
+            <b-button type="submit" variant="primary" :disabled="!hasWeb3()">Contribute</b-button>
         </b-form>
 
         <div class="or mt-3 mb-3 text-center">- OR -</div>
@@ -52,9 +51,9 @@
             return {
                 currentUser: firebase.auth().currentUser,
                 form: {
-                    amount: 1
+                    amount: 5
                 },
-                min: 0.1,
+                min: 5,
                 max: 100.0
             };
         },

@@ -10,12 +10,11 @@
 
             <div class="row">
                 <div class="col">
-                    <contribute v-if="userData.commitment"></contribute>
+                    <contribute v-if="userData && userData.commitment && userData.ethAccount" class="mb-5"></contribute>
+                    <calc></calc>
                 </div>
                 <div class="col">
-                    <calc></calc>
-
-                    <b-card title="Token Sale" sub-title="Information about the Token Sale" class="shadow-sm mt-3">
+                    <b-card title="Token Sale" sub-title="Information about the Token Sale" class="shadow-sm">
 
                         <table class="table table-striped" v-if="tokenData && crowdsaleData">
                             <tbody>
@@ -35,10 +34,10 @@
                                 <td>Min. Investment</td>
                                 <td>{{ this.crowdsaleData.minContributionInEther }} ETH</td>
                             </tr>
-                            <tr>
-                                <td>Total Supply</td>
-                                <td>{{ this.tokenData.totalSupply }} INX</td>
-                            </tr>
+                            <!--<tr>-->
+                                <!--<td>Total Supply</td>-->
+                                <!--<td>{{ this.tokenData.totalSupply }} INX</td>-->
+                            <!--</tr>-->
                             <tr>
                                 <td>Currently Open</td>
                                 <td>{{ this.crowdsaleData.isCrowdsaleOpen ? 'Yes' : 'No' }}</td>

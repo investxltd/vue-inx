@@ -13,6 +13,7 @@ Vue.use(Vuex);
 
 const tokenAbi = require('./assets/abi/tokenAbi');
 const crowdsaleAbi = require('./assets/abi/crowdsaleAbi');
+const commitmentAbi = require('./assets/abi/commitmentAbi');
 
 const bnToString = (bn) => bn[0].toString(10);
 const bnToEther = (bn) => Eth.fromWei(bn[0], 'ether');
@@ -189,17 +190,14 @@ export default new Vuex.Store({
             if (window.web3 && state.userData) {
                 // Use MetaMask's (or similar) provider
                 const eth = new Eth(window.web3.currentProvider);
-                const contract = eth.contract(crowdsaleAbi).at(state.db.crowdsaleAddress);
+                const contract = eth.contract(commitmentAbi).at(state.userData.commitment);
 
                 const valInWei = ethjsUnit.toWei(valInEth, 'ether');
 
-                const tx = await contract.buyTokens(
-                    state.userData.ethAccount,
-                    {value: valInWei, from: state.userData.ethAccount}
-                );
+                const tx = await contract.commit({value: valInWei, from: state.userData.ethAccount});
 
                 commit('commit-contribute-message', {
-                    message: 'You transaction has been submitted',
+                    message: 'Your transaction has been submitted',
                     tx: tx,
                     state: 'info'
                 });
@@ -210,7 +208,7 @@ export default new Vuex.Store({
                     if (receipt) {
                         console.log(receipt);
                         commit('commit-contribute-message', {
-                            message: 'You transaction has been confirmed',
+                            message: 'Your transaction has been confirmed',
                             tx: tx,
                             receipt: receipt,
                             state: 'success'
