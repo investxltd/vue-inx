@@ -10,11 +10,16 @@
 
             <b-collapse is-nav id="nav_collapse">
                 <b-navbar-nav class="ml-auto">
-                    <router-link to="/home" class="nav-link">Home</router-link>
-                    <router-link to="/token-sale" class="nav-link">Token Sale</router-link>
-                    <router-link to="/settings" class="nav-link mr-3">Account Settings</router-link>
 
-                    <a v-on:click="logout" href="#" class="nav-link" >Logout</a>
+                    <router-link to="/home" class="nav-link" v-if="loggedIn()">Home</router-link>
+                    <router-link to="/token-sale" class="nav-link" v-if="loggedIn()">Token Sale</router-link>
+                    <router-link to="/settings" class="nav-link mr-3" v-if="loggedIn()">Account Settings</router-link>
+
+                    <a v-on:click="logout" href="#" class="nav-link" v-if="loggedIn()">Logout</a>
+
+
+                    <router-link to="/signin" class="nav-link" v-if="!loggedIn()">Sign In</router-link>
+                    <router-link to="/register" class="nav-link" v-if="!loggedIn()">Register</router-link>
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
@@ -34,7 +39,7 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex';
+    import { mapState } from 'vuex';
     import firebase from 'firebase';
 
     /* global web3, Web3 */
@@ -51,7 +56,7 @@
                 try {
                     // Request account access if needed
                     await window.ethereum.enable();
-                    console.log(`Enabled`)
+                    console.log(`Enabled`);
                 } catch (error) {
                     // User denied account access...
                     console.log(error);
@@ -76,8 +81,11 @@
             logout: function () {
                 firebase.auth().signOut().then(() => {
                     this.$store.commit('commit-user-data', null);
-                    this.$router.replace('login');
+                    this.$router.replace('loggedout');
                 });
+            },
+            loggedIn: function () {
+                return !!firebase.auth().currentUser;
             }
         }
     };
@@ -87,6 +95,10 @@
     @import 'assets/scss/inx-colours.scss';
     @import '../node_modules/bootstrap/scss/bootstrap.scss';
     @import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css';
+
+    body {
+        font-family: Avenir, sans-serif;
+    }
 
     h1 {
         margin-bottom: 0;
