@@ -48,8 +48,16 @@
                               :state="isEthAccountValid()">
                 </b-form-input>
             </b-form-group>
-            <p class="small">I confirm I am not a citizen, national, resident (tax or otherwise) of the USA, South Korea or China and I agree to the <a href="https://investx.io/ico-terms-and-conditions" target="_blank">Investx T&Cs</a></p>
-            <b-button type="submit" variant="primary">Submit</b-button>
+
+            <b-form-checkbox id="tAndCs"
+                             v-model="userData.tAndCs"
+                             value="accepted"
+                             unchecked-value="not_accepted"
+                            class="mb-4">
+                I confirm I am not a citizen, national, resident (tax or otherwise) of the USA, South Korea or China and I agree to the <a href="https://investx.io/ico-terms-and-conditions" target="_blank">Investx T&Cs</a>
+            </b-form-checkbox>
+
+            <b-button type="submit" variant="primary" :disabled="userData && userData.tAndCs !== 'accepted'">Submit</b-button>
         </b-form>
     </b-card>
 </template>
@@ -89,6 +97,9 @@
                         else {
                             return true;
                         }
+                    })
+                    .then((/*user*/) => {
+                        return db.ref(`users/${firebase.auth().currentUser.uid}/tAndCs`).set(this.userData.tAndCs);
                     })
                     .then(() => {
                         this.dismissCountDown = this.dismissSecs;
