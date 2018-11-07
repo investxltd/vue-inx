@@ -10,7 +10,7 @@
 
             <div class="row">
                 <div class="col">
-                    <contribute v-if="userData && userData.commitment && userData.ethAccount" class="mb-5"></contribute>
+                    <contribute v-if="userData && userData.ethAccount && userData.emailVerified" class="mb-5"></contribute>
                     <calc></calc>
                 </div>
                 <div class="col">

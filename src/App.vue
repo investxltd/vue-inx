@@ -157,4 +157,12 @@
             }
         }
     }
+
+    .navbar-light .navbar-nav .nav-link  {
+        color: $primary;
+    }
+
+    .router-link-active {
+        color: $secondary !important;
+    }
 </style>

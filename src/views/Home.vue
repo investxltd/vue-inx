@@ -17,41 +17,65 @@
                                 <router-link to="/settings" class="alert-link">Account Settings</router-link>
                             </b-alert>
 
-                            <h5>1. Email verification</h5>
-                            <p class="card-text">You email must be verified – when you registered we sent you a verification link by email.</p>
-                            <p class="card-text">Please click on the link to verify the email address which
-                                you registered is yours.</p>
-                            <p class="card-text">You can check whether your email address has been verified in the Account Settings page linked on the left.</p>
-                            <h5>2. Ethereum wallet</h5>
-                            <p class="card-text">Before purchasing INX you must input your Ethereum wallet address where you will send your ETH from into the Account Settings page.</p>
-                            <p class="card-text">The Ethereum wallet
-                                you input will be the address your INX will be sent to, so please ensure it is correct and you have access to it.</p>
-                            <p class="card-text"><strong>Do not use any exchange addresses or any other shared/third party addresses. We will never ask you for your private key</strong></p>
-                            <h5>3. Contributor smart contract address allocation</h5>
-                            <p class="card-text">One you have input your Ethereum address we will allocate you a unique Ethereum smart contract which will show in this dashboard.</p>
-                            <p class="card-text">This address is
-                                created just for you and acts as a secure escrow account created so we can ensure ETH is assigned to individuals alongside their KYC checks in accordance with UK
-                                AML
-                                regulations.</p>
-                            <p class="card-text">ETH can only be transferred out to the Investx crowdsale contract or refunded back to your nominated Ethereum address (in the event the soft cap is
-                                not
-                                reached).</p>
-                            <h5>4. KYC</h5>
-                            <p class="card-text">Investx will perform standard KYC checks before releasing INX tokens to contributors, via a major third party KYC processor.</p>
-                            <p class="card-text">These checks will include standard AML, sanctions, PEP and source of wealth checks (for larger contributions) and will be processed in batches
-                                on or
-                                before the soft cap is reached. <strong>If you have any reason to believe you will fail KYC checks you should not invest.</strong></p>
-                            <h5>5. Token distribution</h5>
-                            <p class="card-text">Once you have passed KYC the committed ETH will transfer to the Investx crowdsale contract and the correct amount of INX will be minted
-                                into your
-                                Ethereum wallet address. Token transfers will be enabled at the end of the ICO.</p>
+                            <div class="row">
+                                <div class="col-md">
+                                    <h5><span class="badge badge-primary">1</span> Email verification</h5>
+                                    <p class="card-text">You email must be verified – when you registered we sent you a verification link by email.</p>
+                                    <p class="card-text">Please click on the link to verify the email address which
+                                        you registered is yours.</p>
+                                    <p class="card-text">You can check whether your email address has been verified in the Account Settings page linked on the left.</p>
+                                </div>
+                                <div class="col-md">
+                                    <h5><span class="badge badge-primary">2</span> Ethereum wallet</h5>
+                                    <p class="card-text">Before purchasing INX you must input your Ethereum wallet address where you will send your ETH from into the Account Settings page.</p>
+                                    <p class="card-text">The Ethereum wallet
+                                        you input will be the address your INX will be sent to, so please ensure it is correct and you have access to it.</p>
+                                    <p class="card-text"><strong>Do not use any exchange addresses or any other shared/third party addresses. We will never ask you for your private key</strong></p>
+                                </div>
+                            </div>
 
-                            <p class="card-text text-right">
-                                <em>For help and support visit our <a href="https://t.me/investxtoken" target="_blank">Telegram</a> channel</em>
-                                <a href="https://t.me/investxtoken" target="_blank" class="ml-3">
-                                    <img src="../assets/images/social/telegram.png" style="max-height: 50px"/>
-                                </a>
-                            </p>
+
+                            <div class="row">
+                                <div class="col-md">
+                                    <h5><span class="badge badge-primary">3</span> Contributor smart contract address allocation</h5>
+                                    <p class="card-text">One you have input your Ethereum address we will allocate you a unique Ethereum smart contract which will show in this dashboard.</p>
+                                    <p class="card-text">This address is
+                                        created just for you and acts as a secure escrow account created so we can ensure ETH is assigned to individuals alongside their KYC checks in accordance with
+                                        UK
+                                        AML
+                                        regulations.</p>
+                                    <p class="card-text">ETH can only be transferred out to the Investx crowdsale contract or refunded back to your nominated Ethereum address (in the event the soft
+                                        cap is
+                                        not
+                                        reached).</p>
+                                </div>
+                                <div class="col-md">
+                                    <h5><span class="badge badge-primary">4</span> KYC</h5>
+                                    <p class="card-text">Investx will perform standard KYC checks before releasing INX tokens to contributors, via a major third party KYC processor.</p>
+                                    <p class="card-text">These checks will include standard AML, sanctions, PEP and source of wealth checks (for larger contributions) and will be processed in batches
+                                        on or
+                                        before the soft cap is reached. <strong>If you have any reason to believe you will fail KYC checks you should not invest.</strong></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md">
+                                    <h5><span class="badge badge-primary">5</span> Token distribution</h5>
+                                    <p class="card-text">Once you have passed KYC the committed ETH will transfer to the Investx crowdsale contract and the correct amount of INX will be minted
+                                        into your
+                                        Ethereum wallet address.</p>
+                                    <p class="card-text">Token transfers will be enabled at the end of the ICO.</p>
+
+                                </div>
+                                <div class="col-md mt-5">
+                                    <p class="card-text text-right">
+                                        <em>For help and support visit our <a href="https://t.me/investxtoken" target="_blank">Telegram</a> channel</em>
+                                        <a href="https://t.me/investxtoken" target="_blank" class="ml-3">
+                                            <img src="../assets/images/social/telegram.png" style="max-height: 50px"/>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
 
                         </div>
                     </b-card>
@@ -185,6 +209,7 @@
 
 
 <style scoped lang="scss">
+    @import '../assets/scss/inx-colours.scss';
     .card {
         min-height: 18rem;
     }
@@ -198,5 +223,13 @@
 
     h5 {
         margin-top: 35px;
+        margin-bottom: 15px;
+        color: $primary;
+        font-weight: bold;
+    }
+
+    .badge {
+        position: relative;
+        top: -3px
     }
 </style>
