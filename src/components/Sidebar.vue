@@ -1,9 +1,5 @@
 <template>
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <img alt="Investx" src="../assets/inx_logo.png" class="inx-logo">
-        </div>
-
+    <nav id="sidebar" class="d-none d-md-block">
         <router-link to="/home">Home</router-link>
         <router-link to="/token-sale">Token Sale</router-link>
         <!--<router-link to="/transactions">Transactions</router-link>-->

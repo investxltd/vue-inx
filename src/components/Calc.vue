@@ -1,5 +1,5 @@
 <template>
-    <b-card title="INX Calculator" sub-title="Use the calculator to compute an estimation of the INX you will receive" class="shadow-sm">
+    <b-card title="INX Calculator" sub-title="Use the calculator to see the quantity of INX you will receive" class="shadow-sm">
         <p class="card-text">
             The current rate is <strong>{{ currentRate() }}</strong> INX per ETH
         </p>
@@ -11,6 +11,7 @@
                             v-model="form.eth"
                             name="eth"
                             placeholder="ETH"
+                            min="0"
                             type="number"
                             @change.native="doCalc">
                     </b-input>
@@ -27,6 +28,7 @@
                             name="inx"
                             placeholder="INX"
                             type="number"
+                            min="0"
                             @change.native="doReverseCalc">
                     </b-input>
                     <span class="float-right pr-1"><strong>{{ currentRate() }} INX</strong></span>

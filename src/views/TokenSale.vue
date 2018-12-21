@@ -1,21 +1,20 @@
 <template>
     <div class="wrapper">
-        <sidebar></sidebar>
+        <!--<sidebar></sidebar>-->
 
         <div id="content">
             <h1>Token Sale</h1>
-            <h3>Invest in INX and get lifetime access to our platform</h3>
+            <h3>Invest in INX and help Investx grow the community</h3>
 
             <hr/>
 
             <div class="row">
                 <div class="col">
-                    <contribute></contribute>
+                    <contribute v-if="userData && userData.ethAccount && userData.emailVerified" class="mb-5"></contribute>
+                    <calc></calc>
                 </div>
                 <div class="col">
-                    <calc></calc>
-
-                    <b-card title="Token Sale" sub-title="Information about the Token Sale" class="shadow-sm mt-5">
+                    <b-card title="Token Sale" sub-title="Information about the Token Sale" class="shadow-sm">
 
                         <table class="table table-striped" v-if="tokenData && crowdsaleData">
                             <tbody>
@@ -35,10 +34,10 @@
                                 <td>Min. Investment</td>
                                 <td>{{ this.crowdsaleData.minContributionInEther }} ETH</td>
                             </tr>
-                            <tr>
-                                <td>Total Supply</td>
-                                <td>{{ this.tokenData.totalSupply }} INX</td>
-                            </tr>
+                            <!--<tr>-->
+                                <!--<td>Total Supply</td>-->
+                                <!--<td>{{ this.tokenData.totalSupply }} INX</td>-->
+                            <!--</tr>-->
                             <tr>
                                 <td>Currently Open</td>
                                 <td>{{ this.crowdsaleData.isCrowdsaleOpen ? 'Yes' : 'No' }}</td>
@@ -55,10 +54,10 @@
                                 <td>Sale Rate</td>
                                 <td>{{ this.crowdsaleData.rate }} INX per ETH</td>
                             </tr>
-                            <tr>
-                                <td>Total Ether Raised</td>
-                                <td>{{ this.crowdsaleData.raisedInEther }}</td>
-                            </tr>
+                            <!--<tr>-->
+                                <!--<td>Total Ether Raised</td>-->
+                                <!--<td>{{ this.crowdsaleData.raisedInEther }}</td>-->
+                            <!--</tr>-->
                             </tbody>
                         </table>
                     </b-card>
@@ -73,20 +72,19 @@
     import Sidebar from '@/components/Sidebar';
     import Contribute from '@/components/Contribute';
     import Calc from '@/components/Calc';
-    import {mapState} from 'vuex';
+    import { mapState } from 'vuex';
 
     export default {
         name: 'token-sale',
         components: {Sidebar, Contribute, Calc},
         data () {
-            return {
-
-            };
+            return {};
         },
         computed: {
             ...mapState([
                 'tokenData',
-                'crowdsaleData'
+                'crowdsaleData',
+                'userData'
             ])
         }
 

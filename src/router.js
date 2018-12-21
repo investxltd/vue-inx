@@ -6,6 +6,7 @@ import Home from '@/views/Home';
 import TokenSale from '@/views/TokenSale';
 import Transactions from '@/views/Transactions';
 import Settings from '@/views/Settings';
+import LoggedOut from '@/views/LoggedOut';
 
 import Login from '@/components/Login';
 import SignUp from '@/components/SignUp';
@@ -67,7 +68,12 @@ let router = new Router({
             path: '/forgot',
             name: 'forgot',
             component: Forgot
-        }
+        },
+        {
+            path: '/loggedout',
+            name: 'loggedout',
+            component: LoggedOut
+        },
     ]
 });
 

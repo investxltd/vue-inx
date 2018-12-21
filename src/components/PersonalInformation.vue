@@ -38,16 +38,26 @@
             <b-form-group id="ethAccount-group"
                           label="ETH wallet:"
                           label-for="ethAccount"
-                          description="This is often called your public key">
+                          description="This is often called your public key. Please ensure you input your correct ETH wallet because INX tokens will be sent to this address only.">
                 <b-form-input id="ethAccount"
                               type="text"
                               v-model="userData.ethAccount"
                               required
                               placeholder="Enter ETH wallet"
+                              :disabled="isEthAccountValid()"
                               :state="isEthAccountValid()">
                 </b-form-input>
             </b-form-group>
-            <b-button type="submit" variant="primary">Submit</b-button>
+
+            <b-form-checkbox id="tAndCs"
+                             v-model="userData.tAndCs"
+                             value="accepted"
+                             unchecked-value="not_accepted"
+                            class="mb-4">
+                I confirm I am not a citizen, national, resident (tax or otherwise) of the USA, South Korea or China and I agree to the <a href="https://investx.io/ico-terms-and-conditions" target="_blank">Investx T&Cs</a>
+            </b-form-checkbox>
+
+            <b-button type="submit" variant="primary" :disabled="userData && userData.tAndCs !== 'accepted'">Submit</b-button>
         </b-form>
     </b-card>
 </template>
@@ -81,10 +91,17 @@
                         displayName: this.userData.displayName,
                     })
                     .then((/*user*/) => {
-                        return db.ref(`users/${firebase.auth().currentUser.uid}/ethAccount`).set(this.userData.ethAccount);
+                        if (this.isEthAccountValid()) {
+                            return db.ref(`users/${firebase.auth().currentUser.uid}/ethAccount`).set(this.userData.ethAccount);
+                        }
+                        else {
+                            return true;
+                        }
+                    })
+                    .then((/*user*/) => {
+                        return db.ref(`users/${firebase.auth().currentUser.uid}/tAndCs`).set(this.userData.tAndCs);
                     })
                     .then(() => {
-                        console.log('updated personal information');
                         this.dismissCountDown = this.dismissSecs;
                         this.$store.dispatch('load-user-data', firebase.auth().currentUser.uid);
                     })
